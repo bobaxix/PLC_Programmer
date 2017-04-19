@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.PI.controllers.saveloadLayoutController">
+   <children>
+      <TextField fx:id="nazwa" layoutX="18.0" layoutY="14.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Button fx:id="anuluj" layoutX="14.0" layoutY="44.0" mnemonicParsing="false" text="Anuluj" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0" />
+      <Button fx:id="zapisz" layoutX="134.0" layoutY="44.0" mnemonicParsing="false" text="OK" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="20.0" />
+      <Label fx:id="error" layoutX="6.0" layoutY="145.0" prefHeight="45.0" prefWidth="178.0" text="Plik o podanej nazwie nie istnieje!" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="108.0" />
+   </children>
+</AnchorPane>

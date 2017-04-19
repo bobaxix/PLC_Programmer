@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.PI.controllers.sendingLayoutController">
+   <children>
+      <ImageView layoutX="75.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="75.0" >
+         <image>
+            <Image url="@error.png" />
+         </image>
+         </ImageView>
+      <Label layoutX="106.0" layoutY="33.0" text="BŁĄD KOMUNIKACJI">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="99.0" layoutY="313.0" text="SPRÓBUJ PONOWNIE!">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="ok" layoutX="172.0" layoutY="340.0" mnemonicParsing="false" text="OK" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="170.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane focusTraversable="true" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.PI.controllers.textLayoutController">
+   <center>
+      <TextArea fx:id="textArea" focusTraversable="false" prefWidth="875.0">
+         <BorderPane.margin>
+            <Insets left="40.0" right="40.0" top="20.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="22.0" />
+         </font></TextArea>
+   </center>
+   <top>
+      <ButtonBar buttonMinWidth="100.0" buttonOrder="L_HE+UNYACBXIO_R" focusTraversable="false" BorderPane.alignment="CENTER">
+         <buttons>
+            <Button fx:id="minus" mnemonicParsing="false" text="-" />
+            <Button fx:id="plus" mnemonicParsing="false" text="+" textAlignment="CENTER" />
+         </buttons>
+         <BorderPane.margin>
+            <Insets left="40.0" right="40.0" top="20.0" />
+         </BorderPane.margin>
+      </ButtonBar>
+   </top>
+   <bottom>
+      <TextArea fx:id="errors" editable="false" maxHeight="-Infinity" minHeight="0.0" prefHeight="100.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="40.0" right="40.0" />
+         </BorderPane.margin>
+      </TextArea>
+   </bottom>
+</BorderPane>
