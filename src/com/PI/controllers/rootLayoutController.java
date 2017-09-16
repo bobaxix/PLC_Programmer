@@ -1,4 +1,4 @@
-package com.PI.controllers;
+/*package com.PI.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,13 +73,13 @@ public class rootLayoutController {
 		program.setVisible(false);
 		textLayoutGenerator();
 		editorLayoutGenerator();		
-	}
+	}*/
 	
 	/*---------------------------------------
 	 * HANDLER ZAPISYWANIA/WCZYTYWANIA PLIKU
 	 ---------------------------------------*/
 	
-	private void zapiszwczytaj(int mode){
+	/*private void zapiszwczytaj(int mode){
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("saveloadLayout.fxml"));
 		AnchorPane root;
@@ -98,7 +98,7 @@ public class rootLayoutController {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	}
+	}*/
 //	}
 
 /*	private void debugging(Boolean b) {
@@ -148,7 +148,7 @@ public class rootLayoutController {
 
 		return pane;
 	}*/
-	private void textLayoutInit(){
+	/*private void textLayoutInit(){
 		
 		textArea.setEditable(true);
 		textArea.clear();
@@ -232,7 +232,7 @@ public class rootLayoutController {
 			}
 			else{
 				errors.clear();
-				errors.appendText("Programowanie zakoñczone sukcesem!");
+				errors.appendText("Programowanie zakoï¿½czone sukcesem!");
 			}
 		}
 	}
@@ -269,7 +269,7 @@ public class rootLayoutController {
 			errors.clear();
 			errors.requestFocus();
 			Segregator s = new Segregator(textArea);
-			Instruction[] instructions = s.segregate();
+			//Instruction[] instructions = s.segregate();
 			int n = s.getInstructionNumber();			
 			Compilator c = new Compilator(instructions,commandList,n);
 			fullCode = c.compile();
@@ -278,8 +278,8 @@ public class rootLayoutController {
 				System.out.println(fullCode.get(0));
 				wyswietlanieBajtow(fullCode);
 				wyslij.setDisable(false);
-				System.out.println("Kompilacja zakoñczona");
-				errors.appendText("Kompilacja zakoñczona sukcesem");
+				System.out.println("Kompilacja zakoï¿½czona");
+				errors.appendText("Kompilacja zakoï¿½czona sukcesem");
 				
 			}
 			else{
@@ -347,4 +347,4 @@ public class rootLayoutController {
 
 
 
-}
+}*/
