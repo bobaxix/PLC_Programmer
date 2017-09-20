@@ -268,7 +268,7 @@ public class rootLayoutController {
 	private void kompilacja(){
 			errors.clear();
 			errors.requestFocus();
-			Segregator s = new Segregator(textArea);
+			Segregation s = new Segregation(textArea);
 			//Instruction[] instructions = s.segregate();
 			int n = s.getInstructionNumber();			
 			Compilator c = new Compilator(instructions,commandList,n);

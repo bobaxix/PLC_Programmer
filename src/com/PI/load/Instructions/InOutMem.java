@@ -13,72 +13,60 @@ public class InOutMem extends Instruction {
     private int[] inputBlock = {0x00000000,0x00000000};
     private int[] outputBlock = {0x00000001,0x00000001};
 
-    private char accessSize;
+    private String accessSize;
     private char accessType;
-    private int baseAddress;
-    private int bitAddress;
+    private int address;
     private Matcher matcher;
+    private String[] parsedOperand;
+    private ArrayList<Integer> codeList;
 
-    private void parseOperand(){
+    public InOutMem(){
+        parsedOperand = new String[3];
+        codeList = new ArrayList<>();
+    }
 
-        Pattern pattern = Pattern.compile("([MIO])([BDW]?)(\\d).?(\\d?)");
+    private boolean parseOperand(){
+
+        Pattern pattern = Pattern.compile("(M|I|O)(\\d+|D|W|B)\\.?(\\d?)");
         matcher = pattern.matcher(operand);
-        matcher.matches();
+        boolean result = matcher.matches();
 
-            accessType = getCharFromMatch(1,0); // bit byte word
-            accessSize = getCharFromMatch(2,0);
-            baseAddress = getIntFromMatch(3); //
-            bitAddress = getIntFromMatch(4); //bit
+        return result;
     }
 
-    private char getCharFromMatch(int matchGroup, int charArrayElement){
-        try{
-            return matcher.group(matchGroup).toCharArray()[charArrayElement];
-        }
-        catch(ArrayIndexOutOfBoundsException e){
-            // nic nie znalazlem moze byc okej
-            return 0;
-        }
-    }
+    private void makeReferencesToParsedOperand(){
+        int numberOfGroups = matcher.groupCount();
 
-    private int getIntFromMatch(int matchGroup){
-        try{
-            return Integer.parseInt(matcher.group(matchGroup));
-        }
-        catch(NumberFormatException e){
-            if (matcher.group(matchGroup).equals(""))
-                return 0;
+        for(int i = 0; i < numberOfGroups; i++)
+            parsedOperand[i] = matcher.group(i+1);
 
-            return -1;
-        }
+        accessType = parsedOperand[0].charAt(0);
+        accessSize = parsedOperand[1];
+        address = Integer.parseInt(parsedOperand[2]); //bit or base adress
     }
 
     private int convertAccessSizeToCode(){
 
-        if(accessSize == 'D')
+        if(accessSize.equals("D"))
             return 0b11;
-        else if(accessSize == 'W')
+        else if(accessSize.equals("W"))
             return 0b10;
-        else if(accessSize == 'B')
+        else if(accessSize.equals("B"))
             return 0b01;
-        else if(accessSize == 0)
+        else
             return 0b00;
-
-        return -1;
     }
 
-    private int convertBaseAdressToChipSelectCode(){
+    private int convertBaseAddressToChipSelectCode(){
 
-        if(accessSize == 'D')
+        if(accessSize.equals("D"))
             return 0;
-        else if(accessSize == 'W')
-            return (baseAddress % 2) << 1;
-        else if(accessSize == 'B')
-            return baseAddress % 4;
-        else if(accessSize == 0)
-            return baseAddress % 4;
-
-        return -1;
+        else if(accessSize.equals("W"))
+            return (address % 2) << 1;
+        else if(accessSize.equals("B"))
+            return address % 4;
+        else
+            return Integer.parseInt(accessSize) % 4;
     }
 
     private int convertAccessTypeToBaseAddressCode(){
@@ -95,32 +83,42 @@ public class InOutMem extends Instruction {
 
     private int convertBaseAdressToOffsetCode(){
 
-            if(accessSize == 'D')
-                return baseAddress;
-            else if(accessSize == 'W')
-                return baseAddress / 2;
-            else if(accessSize == 'B')
-                return baseAddress /4;
-            else if(accessSize == 0)
-                return baseAddress / 4;
-
-            return -1;
+            if(accessSize.equals("D"))
+                return address;
+            else if(accessSize.equals("W"))
+                return address / 2;
+            else if(accessSize.equals("B"))
+                return address /4;
+            else
+                return Integer.parseInt(accessSize) / 4;
     }
+
+   private int getBitAddress(){
+        if(accessSize.matches("\\d+"))
+            return address;
+        else
+            return 0;
+   }
 
     @Override
     public ArrayList<Integer> generateCodeForInstruction(){
 
-        parseOperand();
-        int baseAddress = convertAccessTypeToBaseAddressCode();
-        int accessType = convertAccessSizeToCode();
-        int chipSelectCode = convertBaseAdressToChipSelectCode();
-        int baseAddressOffsetCode = convertBaseAdressToOffsetCode();
-        int fullAddress = baseAddress + baseAddressOffsetCode;
+        boolean result = parseOperand();
+        if(result){
+            makeReferencesToParsedOperand();
+            int baseAddress = convertAccessTypeToBaseAddressCode();
+            int accessType = convertAccessSizeToCode();
+            int chipSelectCode = convertBaseAddressToChipSelectCode();
+            int baseAddressOffsetCode = convertBaseAdressToOffsetCode();
+            int fullAddress = baseAddress + baseAddressOffsetCode;
+            int bitAddress = getBitAddress();
 
-        ArrayList<Integer> codeList = new ArrayList<Integer>();
-        int code = (orderCode << 24) | (accessType << 8) | (fullAddress  << 5) |
-                (chipSelectCode << 3) | (bitAddress);
-        codeList.add(code);
+            codeList = new ArrayList<Integer>();
+            int code = (orderCode << 24) | (accessType << 8) | (fullAddress  << 5) |
+                    (chipSelectCode << 3) | bitAddress;
+            codeList.add(code);
+        }
+
         return codeList;
     }
 }
