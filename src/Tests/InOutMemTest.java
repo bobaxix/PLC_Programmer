@@ -43,10 +43,10 @@ public class InOutMemTest {
     @Test
     public void generatedCodeIsEqualCodeForMemoryDoubleWordAccess(){
         Instruction iom = new InOutMem();
-        iom.setParameters("AND",5, "MD2", 1);
+        iom.setParameters("AND",1, "MD2", 1);
         ArrayList<Integer> code = iom.generateCodeForInstruction();
 
-        assertEquals(0x05000380, (int) code.get(0));
+        assertEquals(0x01000380, (int) code.get(0));
     }
 
     @Test

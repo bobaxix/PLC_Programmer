@@ -26,4 +26,15 @@ public class SegregationTest {
 
         assertEquals(instruction.getOrderCode(), (byte) 1);
     }
+
+    @Test
+    public void forWrongCommandShouldReturnNull() throws IOException{
+
+        OrdersLoader ordersLoader = new OrdersLoader();
+        ArrayList<Order> orderList = ordersLoader.loadOrdersFromTxtFile();
+        Segregation segregation = new Segregation(orderList);
+        Instruction instruction = segregation.getInstructionObject("ANS M0.0", 10);
+
+        assertEquals(instruction, null);
+    }
 }

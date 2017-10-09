@@ -10,8 +10,12 @@ public class NoArgsOp extends Instruction {
     @Override
     public ArrayList<Integer> generateCodeForInstruction(){
         ArrayList<Integer> codeLine = new ArrayList<Integer>();
-        int code = orderCode << 24;
-        codeLine.add(code);
+        if(operand == null) {
+            int code = orderCode << 24;
+            codeLine.add(code);
+        }
+        else
+            LOGGER.warning("Line "+instructionLineNumber+": NAO need not argument.");
         return codeLine;
     }
 }

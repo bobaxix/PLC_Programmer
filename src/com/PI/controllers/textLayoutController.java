@@ -1,10 +1,13 @@
 package com.PI.controllers;
 
 
+import com.PI.load.Logging.MyLogger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
+
+import java.io.IOException;
 
 public class textLayoutController {
 
@@ -19,6 +22,12 @@ public class textLayoutController {
 	public void initialize(){
 		minus.setOnAction((event)-> minusHandler());
 		plus.setOnAction((event)-> plusHandler());
+		try {
+			MyLogger.setup(errors);
+		}
+		catch (IOException e){
+
+		}
 	}
 
 	private void plusHandler() {

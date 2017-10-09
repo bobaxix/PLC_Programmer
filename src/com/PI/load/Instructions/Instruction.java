@@ -3,6 +3,7 @@ package com.PI.load.Instructions;
 import com.PI.load.Order;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Created by bobaxix on 16.09.17.
@@ -16,6 +17,8 @@ public abstract class Instruction {
     protected boolean isLabel = false;
     protected boolean isJump = false;
 
+    protected final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     abstract public ArrayList<Integer> generateCodeForInstruction();
 
     public void setParameters(String order, int orderCode, String operand, int instructionLineNumber){
@@ -23,6 +26,10 @@ public abstract class Instruction {
         this.orderCode = orderCode;
         this.order = order;
         this.instructionLineNumber = instructionLineNumber;
+    }
+
+    public void setParameters(String order, int instructionLineNumber){
+        setParameters(order,0,null,instructionLineNumber);
     }
 
     public String getOperand(){

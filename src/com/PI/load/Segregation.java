@@ -1,17 +1,18 @@
 package com.PI.load;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import com.PI.load.Instructions.*;
 import com.PI.load.Instructions.Instruction;
-import javafx.scene.control.TextArea;
 
 public class Segregation {
 
 	private ArrayList<Order> orderList;
+	private boolean ifLabel = false;
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	public Segregation(ArrayList<Order> orderList){
 		this.orderList = orderList;
@@ -23,6 +24,7 @@ public class Segregation {
 		String[] parsedCodeLine = codeLine.split(" ");
 
 		String orderName = parsedCodeLine[0].trim();
+		ifLabel = orderName.endsWith(":");
 		orderName = orderName.split(":")[0];
 
 		String operand;
@@ -44,21 +46,29 @@ public class Segregation {
 		String[] parsedCodeLine = parseInstructionLine(line);
 		String orderName = parsedCodeLine[0];
 		String operand = parsedCodeLine[1];
-		String type = "";
-		int orderCode = 0;
+
 
 		for(Order order : orderList){
 
 			String mnemonic = order.getMnemonic();
-			if(mnemonic.equals(orderName)){
-				type = order.getType();
-				orderCode = order.getCode();
+			if(mnemonic.equals(orderName) && !ifLabel){
+				String type = order.getType();
+				int orderCode = order.getCode();
+				Instruction instruction = getInstructionObjectByType(type);
+				instruction.setParameters(orderName, orderCode, operand, lineNumber);
+				return instruction;
 			}
 		}
 
-		Instruction instruction = getInstructionObjectByType(type);
-		instruction.setParameters(orderName, orderCode, operand, lineNumber);
-		return instruction;
+		if(operand == null && ifLabel) {
+            Instruction instruction = new Label();
+            instruction.setParameters(orderName,lineNumber);
+            return instruction;
+        }
+
+        System.out.println("LOG");
+        LOGGER.log(new LogRecord(Level.WARNING, "Line "+lineNumber+" : invalid operand."));
+		return null;
 	}
 
 	private Instruction getInstructionObjectByType(String type){
@@ -74,7 +84,7 @@ public class Segregation {
 			case("APB"):
 				return new Apb();
 			default:
-				return new Label();
+				return null;
 		}
 	}
 }

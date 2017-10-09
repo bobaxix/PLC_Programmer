@@ -52,8 +52,12 @@ public class Apb extends Instruction {
         boolean result = parseOperand();
         if(result){
             int address = getAddress();
-            codeLine.add(orderCode << 24 | address);
+
+            if(checkAddress(address))
+                codeLine.add(orderCode << 24 | address);
         }
+        else
+            LOGGER.warning("Line "+instructionLineNumber+": invalid argument");
         return codeLine;
     }
 
@@ -64,9 +68,11 @@ public class Apb extends Instruction {
    private boolean parseOperand(){
 
         boolean result = matchOperand();
-        int numberOfGroups = matcher.groupCount();
-        for(int i =0; i < numberOfGroups; i++)
-           parsedOperand[i] = matcher.group(i+1);
+        if(result) {
+            int numberOfGroups = matcher.groupCount();
+            for (int i = 0; i < numberOfGroups; i++)
+                parsedOperand[i] = matcher.group(i + 1);
+        }
         return result;
    }
     private boolean matchOperand(){
@@ -98,8 +104,28 @@ public class Apb extends Instruction {
             int address = getBaseAddress();
             return counterAddress[0] + address;
         }
-
         return -1;
+    }
+
+    private boolean checkAddress(int address){
+
+        String baseAddress = parsedOperand[0];
+        boolean result = false;
+
+        if(baseAddress.equals("IN"))
+            result = address == gpi;
+        else if(baseAddress.equals("OUT"))
+            result = address == gpo;
+        else if(baseAddress.equals("T")) {
+            result = address < timerAddress[1];
+        }
+        else if(baseAddress.equals("C")) {
+            result = address < counterAddress[1];
+        }
+        if(!result)
+            LOGGER.warning("Line "+instructionLineNumber+": address out of range");
+
+        return result;
     }
 
     private int getBaseAddress(){

@@ -9,6 +9,7 @@ public class Label extends Instruction{
 
     public Label(){
         isLabel = true;
+
     }
     @Override
     public ArrayList<Integer> generateCodeForInstruction(){

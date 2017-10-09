@@ -35,17 +35,23 @@ public class CompilatorTest {
 
         String code = "JMP skok1 \n" +
                 "JMP skok2 \n" +
-                "AND M1.0 \n" +
+                "AND MD2 \n" +
                 "skok2: \n" +
                 "NOT \n" +
                 "AND M2.0 \n" +
                 "skok1: \n" +
-                "OR MB2 \n";
+                "OR MB2 \n" +
+                "APB_WR C0.CU";
 
         ArrayList<Order> orderList = new OrdersLoader().loadOrdersFromTxtFile();
         Compilator compilator = new Compilator(orderList);
 
         ArrayList<Integer> codeList = compilator.compile(code);
+
+        assertEquals(0x0C000005, (int) codeList.get(0));
         assertEquals(0x0C000003 ,(int) codeList.get(1));
+        assertEquals(0x01000380, (int) codeList.get(2));
+        assertEquals(0x0B000000, (int) codeList.get(3));
+        assertEquals(0x1E000000, (int) codeList.get(6));
     }
 }

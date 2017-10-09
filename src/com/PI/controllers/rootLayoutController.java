@@ -1,20 +1,20 @@
-/*package com.PI.controllers;
+package com.PI.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 
+import com.PI.MVC.controllers.CompileHandler;
 import com.PI.load.Compilator;
-import com.PI.load.Instruction;
 import com.PI.load.Order;
 import com.PI.load.Postman;
-import com.PI.load.Segregator;
+import com.PI.load.Segregation;
 import com.PI.load.TextAreaTester;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -30,27 +30,28 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class rootLayoutController {
-	
+
 	private BorderPane root;
 	private TextArea textArea,errors;
-	private Map<String, Order> commandList;
+	private ArrayList<Order> ordersList;
 	private ArrayList<Integer> fullCode;
 	private int error = -1;
-	
+	private CompileHandler compileHandler;
+
 	@FXML
 	private MenuItem zamknij,nowy,kompiluj,edytuj,wyslij,zapiszPlik,wczytajPlik;
-		
+
 	private Runnable checkTextArea;
 	private Thread tester;
-		
+
 	private PopupWindow keyboard;
 
 	private final Rectangle2D bounds = Screen.getPrimary().getBounds();
-	
+
 	private Stage stage;
-	
+
 	private BorderPane textPane;
-	
+
 	private AnchorPane pane;
 	private editorLayoutController editorLayoutController;
 	private int load = 1;
@@ -59,27 +60,35 @@ public class rootLayoutController {
 
 	@FXML
 	private Menu program;
-	
-	@FXML 
+
+	@FXML
 	private void initialize(){
 		zamknij.setOnAction((event) -> System.exit(0));
 		nowy.setOnAction((event)-> textLayoutInit());
-		kompiluj.setOnAction((event)->kompilacja());
-		edytuj.setOnAction((event)-> editorLayoutInit());
-		wyslij.setOnAction((event) -> sendToPLC());
+
+		edytuj.setOnAction((event)-> {
+		    root.setCenter(pane);
+        });
+
+		wyslij.setOnAction((event) -> {
+
+			System.out.println("Send");
+			ArrayList<Integer> code = compileHandler.getFullCode();
+			wyswietlanieBajtow(code);
+
+		});
 		zapiszPlik.setOnAction((event) -> zapiszwczytaj(save));
 		wczytajPlik.setOnAction((event)-> zapiszwczytaj(load));
-		//debugging.selectedProperty().addListener((event,oldValue,newValue) -> debugging(newValue));
 		program.setVisible(false);
 		textLayoutGenerator();
-		editorLayoutGenerator();		
-	}*/
-	
+		editorLayoutGenerator();
+	}
+
 	/*---------------------------------------
 	 * HANDLER ZAPISYWANIA/WCZYTYWANIA PLIKU
 	 ---------------------------------------*/
-	
-	/*private void zapiszwczytaj(int mode){
+
+	private void zapiszwczytaj(int mode){
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("saveloadLayout.fxml"));
 		AnchorPane root;
@@ -98,69 +107,21 @@ public class rootLayoutController {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	}*/
-//	}
+	}
 
-/*	private void debugging(Boolean b) {
-		if(b == true){
-			System.out.println(textArea.getWidth());
-			textPane.setCenter(null);
-			AnchorPane pane = makeList();
-			textPane.setRight(pane);
-			textPane.setLeft(textArea);
-			textArea.setEditable(false);
-			
-			BorderPane.setMargin(textPane.getRight(), new Insets(40,40,40,0));
+	private void textLayoutInit(){
 
-			double z = textPane.getWidth() - pane.getPrefWidth();
-			
-			double a = BorderPane.getMargin(textPane.getRight()).getLeft()+
-					BorderPane.getMargin(textPane.getRight()).getRight()+
-					BorderPane.getMargin(textPane.getLeft()).getLeft()+
-					BorderPane.getMargin(textPane.getLeft()).getRight();
-	
-			textArea.setMaxWidth(z-a);
-			textArea.setPrefWidth(z-a);
-			textPane.autosize();
-
-		}
-		else{
-			textPane.setLeft(null);
-			textPane.setRight(null);
-			textPane.setCenter(textArea);
-			textArea.setMaxWidth(textPane.getWidth());
-			textArea.setEditable(true);
-			
-		}
-	}*/
-
-	/*private AnchorPane makeList(){
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("debuggingLayout.fxml"));
-		AnchorPane pane = null;
-		debuggingLayoutController controller = loader.getController();
-		try {
-			pane = (AnchorPane) loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return pane;
-	}*/
-	/*private void textLayoutInit(){
-		
 		textArea.setEditable(true);
 		textArea.clear();
 		errors.clear();
 		root.setCenter(textPane);
 		program.setVisible(true);
-		wyslij.setDisable(true);
+		wyslij.setDisable(false);
 		checkTextArea = new  TextAreaTester(kompiluj, textArea, root);
 		tester = new Thread(checkTextArea);
 		tester.start();
 	}
-	
+
 	private void textLayoutGenerator(){
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("textLayout.fxml"));
@@ -175,12 +136,12 @@ public class rootLayoutController {
 		errors = controller.getErrorsArea();
 		textArea.focusedProperty().addListener((ob,b,b1) -> change());
 
-		
+
 	}
-	
+
 	private void editorLayoutGenerator(){
-		
-		
+
+
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("editorLayout.fxml"));
 		try {
@@ -190,59 +151,20 @@ public class rootLayoutController {
 			e.printStackTrace();
 		}
 		editorLayoutController = loader.getController();
-		
-	}
-	
-	private void editorLayoutInit(){
-			
-			editorLayoutController.getMap(commandList);
-			root.setCenter(pane);
-			program.setVisible(false);
-			errors.clear();
-	}
-	
-	private synchronized void sendToPLC() {
-		
-		if(error != -1){
-			Postman p = new Postman(fullCode);
-			p.getErrorState();
-			boolean checksumProperty = p.sendCode();
-			if(checksumProperty == false){
-				try {
-					textArea.setDisable(true);
-					wyslij.setDisable(true);
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(getClass().getResource("SendingOK.fxml"));
-					AnchorPane root;
-					root = (AnchorPane) loader.load();
-					sendingLayoutController controller = loader.getController();
-					controller.getTextArea(textArea);
-					controller.getWyslij(wyslij);
-					Stage secondaryStage = new Stage();
-					secondaryStage.setScene(new Scene(root));
-					secondaryStage.centerOnScreen();
-					secondaryStage.setResizable(false);
-					secondaryStage.show();
-					System.out.println("NOWE OKNO");
-					
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 
-			}
-			else{
-				errors.clear();
-				errors.appendText("Programowanie zako�czone sukcesem!");
-			}
-		}
 	}
-	
+
+	private synchronized void sendToPLC() {
+	    System.out.println("Send");
+	    ArrayList<Integer> code = compileHandler.getFullCode();
+
+	    wyswietlanieBajtow(code);
+	}
+
 	private void change() {
 		try{
 	        if(keyboard==null){
 	            keyboard=getPopupWindow();
-	            
-	            System.out.println("x");
 	            double off = keyboard.getY();
 	            keyboard.yProperty().addListener(obs->{
 	                Platform.runLater(()->{
@@ -257,7 +179,7 @@ public class rootLayoutController {
 	                    double y = bounds.getHeight()-(off-keyboard.getY());
 	                    stage.setHeight(y);
 	                });
-	             
+
 	            });
 	        }
 		}
@@ -265,33 +187,6 @@ public class rootLayoutController {
 	}
 
 
-	private void kompilacja(){
-			errors.clear();
-			errors.requestFocus();
-			Segregation s = new Segregation(textArea);
-			//Instruction[] instructions = s.segregate();
-			int n = s.getInstructionNumber();			
-			Compilator c = new Compilator(instructions,commandList,n);
-			fullCode = c.compile();
-			error = c.getError();
-			if(error != -1){
-				System.out.println(fullCode.get(0));
-				wyswietlanieBajtow(fullCode);
-				wyslij.setDisable(false);
-				System.out.println("Kompilacja zako�czona");
-				errors.appendText("Kompilacja zako�czona sukcesem");
-				
-			}
-			else{
-				wyslij.setDisable(true);
-				errors.setText(c.getErrorsList());
-			}
-			
-			
-	}
-	
-
-	
 	private void wyswietlanieBajtow(ArrayList<Integer> arg){
 		for(Integer x : arg){
 			for(int i = 31; i>=0; i--){
@@ -304,9 +199,9 @@ public class rootLayoutController {
 			System.out.print("\n");
 		}
 	}
-	
-	
-	
+
+
+
 	public void getRoot(BorderPane root){
 		this.root = root;
 	}
@@ -314,22 +209,24 @@ public class rootLayoutController {
 	public void setStage(Stage stage){
 		this.stage=stage;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public void setCommandsList(Object o){
-		commandList =  (Map<String, Order>) o;
+	public void setCommandsList(ArrayList<Order> ordersList){
+	    this.ordersList =  ordersList;
+        compileHandler = new CompileHandler(ordersList, textArea, errors);
+        kompiluj.setOnAction(compileHandler);
 	}
-	
+
 	private PopupWindow getPopupWindow() {
 
 		try{
-	    @SuppressWarnings("deprecation") 
+	    @SuppressWarnings("deprecation")
 	    final Iterator<Window> windows = Window.impl_getWindows();
 
 	    while (windows.hasNext()) {
 	        final Window window = windows.next();
 	        if (window instanceof PopupWindow) {
-	            if(window.getScene()!=null && window.getScene().getRoot()!=null){ 
+	            if(window.getScene()!=null && window.getScene().getRoot()!=null){
 	                Parent root = window.getScene().getRoot();
 	                if(root.getChildrenUnmodifiable().size()>0){
 	                    Node popup = root.getChildrenUnmodifiable().get(0);
@@ -347,4 +244,4 @@ public class rootLayoutController {
 
 
 
-}*/
+}

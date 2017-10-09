@@ -9,14 +9,14 @@ import com.pi4j.wiringpi.Spi;
 
 public class Postman {
 
-	final GpioPinDigitalOutput reset;// = Main.reset;
+	//final GpioPinDigitalOutput reset;// = Main.reset;
 	private ArrayList<Integer> code;
 	private int error;
 	private int checksum;
 	
 	public Postman(ArrayList<Integer> code){
 		this.code = code;
-        this.reset = Main.reset;
+        //this.reset = Main.reset;
 		error = Spi.wiringPiSPISetupMode(0, 500000, Spi.MODE_3);
 		
 		if(error != -1){
@@ -51,16 +51,16 @@ public class Postman {
 	public boolean sendCode(){
 		boolean checksumProperty = false;
 		if(error != -1){
-			reset.setState(PinState.LOW);
+			//reset.setState(PinState.LOW);
 			/*--------------------------------------
-			 * rodzielczoœæ sleep'a - 1 ms
+			 * rodzielczoï¿½ï¿½ sleep'a - 1 ms
 			 -----------------------------------------*/
 		try {
 			Thread.sleep(0,100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		reset.setState(PinState.HIGH);
+		//reset.setState(PinState.HIGH);
 		
 		int checksumPLC;
 		int l = code.size()-1;

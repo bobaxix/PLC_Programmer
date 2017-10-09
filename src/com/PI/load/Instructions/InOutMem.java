@@ -100,10 +100,28 @@ public class InOutMem extends Instruction {
             return 0;
    }
 
+   private boolean checkAddress(int address){
+
+       boolean result = false;
+       if(accessType == 'M')
+           result = address <= memoryBlock[1];
+       else if (accessType == 'I')
+           result =  address <= inputBlock[1];
+       else if (accessType == 'O')
+           result =  address <= outputBlock[1];
+
+       if(!result)
+           LOGGER.warning("Line "+instructionLineNumber+": address out of range.");
+
+       return result;
+   }
+
     @Override
     public ArrayList<Integer> generateCodeForInstruction(){
 
         boolean result = parseOperand();
+        codeList = new ArrayList<>();
+
         if(result){
             makeReferencesToParsedOperand();
             int baseAddress = convertAccessTypeToBaseAddressCode();
@@ -113,12 +131,14 @@ public class InOutMem extends Instruction {
             int fullAddress = baseAddress + baseAddressOffsetCode;
             int bitAddress = getBitAddress();
 
-            codeList = new ArrayList<Integer>();
-            int code = (orderCode << 24) | (accessType << 8) | (fullAddress  << 5) |
-                    (chipSelectCode << 3) | bitAddress;
-            codeList.add(code);
+            if(checkAddress(fullAddress)) {
+                int code = (orderCode << 24) | (accessType << 8) | (fullAddress << 5) |
+                        (chipSelectCode << 3) | bitAddress;
+                codeList.add(code);
+            }
         }
-
+        else
+            LOGGER.warning("Line "+instructionLineNumber+": invalid argument");
         return codeList;
     }
 }
