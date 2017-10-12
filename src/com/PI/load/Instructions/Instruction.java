@@ -32,10 +32,6 @@ public abstract class Instruction {
         setParameters(order,0,null,instructionLineNumber);
     }
 
-    public String getOperand(){
-        return operand;
-    }
-
     public int getOrderCode(){
         return orderCode;
     }

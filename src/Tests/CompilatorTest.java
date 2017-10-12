@@ -1,5 +1,6 @@
 package Tests;
 
+import com.PI.load.CodeList;
 import com.PI.load.Compilator;
 import com.PI.load.Order;
 import com.PI.load.OrdersLoader;
@@ -26,8 +27,8 @@ public class CompilatorTest {
         ArrayList<Order> orderList = new OrdersLoader().loadOrdersFromTxtFile();
         Compilator compilator = new Compilator(orderList);
 
-        ArrayList<Integer> codeList = compilator.compile(code);
-        assertEquals(0x0C000003 ,(int) codeList.get(1));
+        CodeList codeList = compilator.compile(code);
+        assertEquals(0x0C000003 ,(int) codeList.getCodeListIndexOf(2));
     }
 
     @Test
@@ -46,12 +47,12 @@ public class CompilatorTest {
         ArrayList<Order> orderList = new OrdersLoader().loadOrdersFromTxtFile();
         Compilator compilator = new Compilator(orderList);
 
-        ArrayList<Integer> codeList = compilator.compile(code);
+        CodeList codeList = compilator.compile(code);
 
-        assertEquals(0x0C000005, (int) codeList.get(0));
-        assertEquals(0x0C000003 ,(int) codeList.get(1));
-        assertEquals(0x01000380, (int) codeList.get(2));
-        assertEquals(0x0B000000, (int) codeList.get(3));
-        assertEquals(0x1E000000, (int) codeList.get(6));
+        assertEquals(0x0C000005, (int) codeList.getCodeListIndexOf(1));
+        assertEquals(0x0C000003 ,(int) codeList.getCodeListIndexOf(2));
+        assertEquals(0x01000380, (int) codeList.getCodeListIndexOf(3));
+        assertEquals(0x0B000000, (int) codeList.getCodeListIndexOf(4));
+        assertEquals(0x1E000000, (int) codeList.getCodeListIndexOf(7));
     }
 }

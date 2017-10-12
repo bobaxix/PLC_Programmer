@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.PI.MVC.controllers.CompileHandler;
-import com.PI.load.Compilator;
-import com.PI.load.Order;
-import com.PI.load.Postman;
-import com.PI.load.Segregation;
-import com.PI.load.TextAreaTester;
+import com.PI.load.*;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -66,6 +62,15 @@ public class rootLayoutController {
 		zamknij.setOnAction((event) -> System.exit(0));
 		nowy.setOnAction((event)-> textLayoutInit());
 
+
+		kompiluj.setOnAction((event -> {
+			errors.clear();
+			Compilator compilator = new Compilator(ordersList);
+			compileHandler = new CompileHandler(compilator);
+			compileHandler.handle(textArea.getText());
+
+		}));
+
 		edytuj.setOnAction((event)-> {
 		    root.setCenter(pane);
         });
@@ -73,7 +78,7 @@ public class rootLayoutController {
 		wyslij.setOnAction((event) -> {
 
 			System.out.println("Send");
-			ArrayList<Integer> code = compileHandler.getFullCode();
+			CodeList code = compileHandler.getFullCode();
 			wyswietlanieBajtow(code);
 
 		});
@@ -114,7 +119,8 @@ public class rootLayoutController {
 		textArea.setEditable(true);
 		textArea.clear();
 		errors.clear();
-		root.setCenter(textPane);
+		//root.setCenter(textPane);
+		stage.setScene(new Scene(textPane));
 		program.setVisible(true);
 		wyslij.setDisable(false);
 		checkTextArea = new  TextAreaTester(kompiluj, textArea, root);
@@ -156,7 +162,7 @@ public class rootLayoutController {
 
 	private synchronized void sendToPLC() {
 	    System.out.println("Send");
-	    ArrayList<Integer> code = compileHandler.getFullCode();
+	    CodeList code = compileHandler.getFullCode();
 
 	    wyswietlanieBajtow(code);
 	}
@@ -187,8 +193,8 @@ public class rootLayoutController {
 	}
 
 
-	private void wyswietlanieBajtow(ArrayList<Integer> arg){
-		for(Integer x : arg){
+	private void wyswietlanieBajtow(CodeList arg){
+		for(Integer x : arg.getCodeList()){
 			for(int i = 31; i>=0; i--){
 				if((((x)>>i) & 0x01) == 0)
 				System.out.print("0");
@@ -213,8 +219,7 @@ public class rootLayoutController {
 	@SuppressWarnings("unchecked")
 	public void setCommandsList(ArrayList<Order> ordersList){
 	    this.ordersList =  ordersList;
-        compileHandler = new CompileHandler(ordersList, textArea, errors);
-        kompiluj.setOnAction(compileHandler);
+
 	}
 
 	private PopupWindow getPopupWindow() {

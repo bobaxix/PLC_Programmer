@@ -1,0 +1,33 @@
+package com.PI.load;
+
+import java.util.ArrayList;
+
+public class CodeList {
+
+    private ArrayList<Integer> codeList;
+
+    public CodeList() {
+        this.codeList = new ArrayList<>();
+    }
+
+    public ArrayList<Integer> getCodeList() {
+        return codeList;
+    }
+
+    public void addCompiledCodeLine(ArrayList<Integer> codeLine){
+
+        if(codeList.isEmpty())
+            codeList.add(0);
+
+        codeList.addAll(codeLine);
+        actualizePlcMemorySize(codeLine.size());
+    }
+
+    public int getCodeListIndexOf(int index){
+        return codeList.get(index);
+    }
+
+    private void actualizePlcMemorySize(int size){
+        codeList.set(0, codeList.get(0) + size);
+    }
+}

@@ -1,5 +1,6 @@
 package com.PI.MVC.controllers;
 
+import com.PI.load.CodeList;
 import com.PI.load.Compilator;
 import com.PI.load.Order;
 import javafx.event.Event;
@@ -11,28 +12,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class CompileHandler implements EventHandler {
+public class CompileHandler {
 
-    ArrayList<Order> orderList;
-    private TextArea codeTextArea;
-    private TextArea logTextArea;
-    ArrayList<Integer> fullCode;
+    private Compilator compilator;
+    CodeList fullCode;
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public CompileHandler(ArrayList<Order> orderList, TextArea codeTextArea, TextArea logTextArea){
-        this.orderList = orderList;
-        this.codeTextArea = codeTextArea;
-        this.logTextArea = logTextArea;
+    public CompileHandler(Compilator compilator){
+        this.compilator = compilator;
     }
 
-    @Override
-    public void handle(Event event) {
+    public void handle(String code) {
 
-        logTextArea.clear();
-        Compilator compilator = new Compilator(orderList);
 
         try {
-            fullCode = compilator.compile(codeTextArea.getText());
+            fullCode = compilator.compile(code);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +40,7 @@ public class CompileHandler implements EventHandler {
 
     }
 
-    public ArrayList<Integer> getFullCode() {
+    public CodeList getFullCode() {
         return fullCode;
     }
 }

@@ -21,7 +21,7 @@ public class Compilator {
 		this.orderList = orderList;
 	}
 
-	public ArrayList<Integer> compile(String code) throws IOException{
+	public CodeList compile(String code) throws IOException{
 
 		Segregation segregation = new Segregation(orderList);
 
@@ -98,7 +98,6 @@ public class Compilator {
 			String checkedLabel = ((Label) labels.get(i)).getLabel();
 			for(int j = i+1; j< labelsListSize; j++ ){
 				String comparedLabel = ((Label) labels.get(j)).getLabel();
-                System.out.println(comparedLabel+" "+checkedLabel);
                 if(checkedLabel.equals(comparedLabel)) {
                     LOGGER.warning("Repeated labels in lines " + labels.get(i).getInstructionLineNumber() + "" +
                             " and " + labels.get(j).getInstructionLineNumber());
@@ -110,10 +109,10 @@ public class Compilator {
 		return error;
 	}
 
-	private ArrayList<Integer> generateBinaryCode(ArrayList<Instruction> instructions,
+	private CodeList generateBinaryCode(ArrayList<Instruction> instructions,
 												  ArrayList<Instruction> labels){
 
-		ArrayList<Integer> codeList = new ArrayList<>();
+		CodeList codeList = new CodeList();
 		for(Instruction instruction : instructions){
 
 			if(instruction.isJump())
@@ -121,7 +120,7 @@ public class Compilator {
 
 			ArrayList<Integer> codeLine = instruction.generateCodeForInstruction();
             if(!codeLine.isEmpty())
-				codeList.addAll(codeLine);
+				codeList.addCompiledCodeLine(codeLine);
 			else
 				error = true;
 		}
