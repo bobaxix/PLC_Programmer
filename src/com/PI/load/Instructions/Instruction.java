@@ -1,7 +1,5 @@
 package com.PI.load.Instructions;
 
-import com.PI.load.Order;
-
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -21,15 +19,15 @@ public abstract class Instruction {
 
     abstract public ArrayList<Integer> generateCodeForInstruction();
 
-    public void setParameters(String order, int orderCode, String operand, int instructionLineNumber){
+    public void set(String order, int orderCode, String operand, int instructionLineNumber){
         this.operand = operand;
         this.orderCode = orderCode;
         this.order = order;
         this.instructionLineNumber = instructionLineNumber;
     }
 
-    public void setParameters(String order, int instructionLineNumber){
-        setParameters(order,0,null,instructionLineNumber);
+    public void set(String order, int instructionLineNumber){
+        set(order,0,null,instructionLineNumber);
     }
 
     public int getOrderCode(){

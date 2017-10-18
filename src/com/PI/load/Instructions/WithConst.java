@@ -8,27 +8,28 @@ import java.util.ArrayList;
 public class WithConst extends Instruction{
 
     int number;
+    ArrayList<Integer> codeList;
 
     @Override
     public ArrayList<Integer> generateCodeForInstruction(){
 
-        parseOperand();
-        ArrayList<Integer> codeList = new ArrayList<Integer>();
-        codeList.add(orderCode << 24);
-        codeList.add(number);
+        try {
+            parseOperand();
+            codeList = new ArrayList<Integer>();
+            codeList.add(orderCode << 24);
+            codeList.add(number);
+        }
+        catch(NullPointerException e){
+            return null;
+        }
         return codeList;
     }
 
-    private void parseOperand(){
+    private void parseOperand() throws NumberFormatException{
 
         if(operand.startsWith("#")){
-            try{
                 String tempOperand = operand.substring(1);
                 number = Integer.parseInt(tempOperand);
-            }
-            catch(NumberFormatException e){
-                number = 0;
-            }
         }
     }
 }

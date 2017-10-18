@@ -13,7 +13,7 @@ public class Label extends Instruction{
     }
     @Override
     public ArrayList<Integer> generateCodeForInstruction(){
-        return null;
+        return new ArrayList<>();
     }
 
     public String getLabel(){

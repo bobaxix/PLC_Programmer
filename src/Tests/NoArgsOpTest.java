@@ -14,11 +14,11 @@ import static junit.framework.Assert.assertEquals;
 public class NoArgsOpTest {
 
     @Test
-    public void generatedCodeIsEqualCodeForMemoryBitAccess(){
+    public void generatedCodeIsEqualCode(){
         Instruction iom = new InOutMem();
-        iom.setParameters("NOT",11, "", 10);
+        iom.set("NOT",11, "", 10);
         ArrayList<Integer> code = iom.generateCodeForInstruction();
 
-        assertEquals(0x0B000000, (int) code.get(0));
+        assertEquals(null, code);
     }
 }

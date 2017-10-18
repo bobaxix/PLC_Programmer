@@ -55,19 +55,18 @@ public class Segregation {
 				String type = order.getType();
 				int orderCode = order.getCode();
 				Instruction instruction = getInstructionObjectByType(type);
-				instruction.setParameters(orderName, orderCode, operand, lineNumber);
+				instruction.set(orderName, orderCode, operand, lineNumber);
 				return instruction;
 			}
 		}
 
 		if(operand == null && ifLabel) {
             Instruction instruction = new Label();
-            instruction.setParameters(orderName,lineNumber);
+            instruction.set(orderName,lineNumber);
             return instruction;
         }
 
-        System.out.println("LOG");
-        LOGGER.log(new LogRecord(Level.WARNING, "Line "+lineNumber+" : invalid operand."));
+        LOGGER.log(new LogRecord(Level.WARNING, "Line "+lineNumber+" : invalid order."));
 		return null;
 	}
 

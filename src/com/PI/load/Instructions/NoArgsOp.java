@@ -13,9 +13,11 @@ public class NoArgsOp extends Instruction {
         if(operand == null) {
             int code = orderCode << 24;
             codeLine.add(code);
+            return codeLine;
         }
         else
             LOGGER.warning("Line "+instructionLineNumber+": NAO need not argument.");
-        return codeLine;
+
+        return null;
     }
 }

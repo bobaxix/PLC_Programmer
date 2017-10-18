@@ -7,7 +7,9 @@ public class CodeList {
     private ArrayList<Integer> codeList;
 
     public CodeList() {
+
         this.codeList = new ArrayList<>();
+        codeList.add(0);
     }
 
     public ArrayList<Integer> getCodeList() {
@@ -15,9 +17,6 @@ public class CodeList {
     }
 
     public void addCompiledCodeLine(ArrayList<Integer> codeLine){
-
-        if(codeList.isEmpty())
-            codeList.add(0);
 
         codeList.addAll(codeLine);
         actualizePlcMemorySize(codeLine.size());

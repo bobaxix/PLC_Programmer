@@ -135,10 +135,12 @@ public class InOutMem extends Instruction {
                 int code = (orderCode << 24) | (accessType << 8) | (fullAddress << 5) |
                         (chipSelectCode << 3) | bitAddress;
                 codeList.add(code);
+                return codeList;
             }
         }
         else
             LOGGER.warning("Line "+instructionLineNumber+": invalid argument");
-        return codeList;
+
+        return null;
     }
 }

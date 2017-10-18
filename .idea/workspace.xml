@@ -2,17 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ecb44aa-bced-43dd-a53f-95725a4652d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/Tests/CompilatorTest.class" afterPath="$PROJECT_DIR$/bin/Tests/CompilatorTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/PI/MVC/controllers/CompileHandler.class" afterPath="$PROJECT_DIR$/bin/com/PI/MVC/controllers/CompileHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/PI/controllers/rootLayoutController.class" afterPath="$PROJECT_DIR$/bin/com/PI/controllers/rootLayoutController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/PI/load/Compilator.class" afterPath="$PROJECT_DIR$/bin/com/PI/load/Compilator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/com/PI/load/Instructions/Instruction.class" afterPath="$PROJECT_DIR$/bin/com/PI/load/Instructions/Instruction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tests/ApbTest.java" afterPath="$PROJECT_DIR$/src/Tests/ApbTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tests/CompilatorTest.java" afterPath="$PROJECT_DIR$/src/Tests/CompilatorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java" afterPath="$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/controllers/rootLayoutController.java" afterPath="$PROJECT_DIR$/src/com/PI/controllers/rootLayoutController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tests/InOutMemTest.java" afterPath="$PROJECT_DIR$/src/Tests/InOutMemTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tests/NoArgsOpTest.java" afterPath="$PROJECT_DIR$/src/Tests/NoArgsOpTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tests/WithConstTest.java" afterPath="$PROJECT_DIR$/src/Tests/WithConstTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/CodeList.java" afterPath="$PROJECT_DIR$/src/com/PI/load/CodeList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Compilator.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Compilator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/Apb.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/Apb.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/InOutMem.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/InOutMem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/Instruction.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/Instruction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/JumpControl.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/JumpControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/Label.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/Label.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/NoArgsOp.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/NoArgsOp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Instructions/WithConst.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Instructions/WithConst.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/PI/load/Segregation.java" afterPath="$PROJECT_DIR$/src/com/PI/load/Segregation.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,36 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rootLayoutController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/PI/controllers/rootLayoutController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3114">
-              <caret line="196" column="41" lean-forward="false" selection-start-line="196" selection-start-column="41" selection-end-line="196" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#zapiszwczytaj#0;class#rootLayoutController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompileHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Compilator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/PI/load/Compilator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="34" />
+            <state relative-caret-position="212">
+              <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,46 +40,65 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompilatorTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ApbTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Tests/ApbTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="429">
+              <caret line="47" column="36" lean-forward="false" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoArgsOpTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Tests/NoArgsOpTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Instruction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/Instruction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding>
+                <element signature="e#858#859#0" expanded="true" />
+                <element signature="e#913#914#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JumpControl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/JumpControl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompilatorTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Tests/CompilatorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="28">
+              <caret line="107" column="22" lean-forward="false" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/PI/load/CodeList.java">
+      <file leaf-file-name="NoArgsOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/NoArgsOp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+            <state relative-caret-position="198">
+              <caret line="11" column="63" lean-forward="false" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Postman.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/PI/load/Postman.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Segregation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/PI/load/Segregation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#parseInstructionLine#0;class#Segregation#0" expanded="false" />
-                <element signature="method#getInstructionObjectByType#0;class#Segregation#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -154,13 +152,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/WithConst.java" />
         <option value="$PROJECT_DIR$/src/Tests/SegregatorTest.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Segregator.java" />
         <option value="$PROJECT_DIR$/src/Tests/WithConstTest.java" />
-        <option value="$PROJECT_DIR$/src/Tests/NoArgsOpTest.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/JumpControl.java" />
-        <option value="$PROJECT_DIR$/src/Tests/ApbTest.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Logger.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Logger.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/MyLogger.java" />
@@ -169,32 +163,36 @@
         <option value="$PROJECT_DIR$/src/com/PI/load/Postman.java" />
         <option value="$PROJECT_DIR$/src/Tests/SegregationTest.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/OrdersLoader.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Apb.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/NoArgsOp.java" />
         <option value="$PROJECT_DIR$/src/com/PI/MVC/s.java" />
         <option value="$PROJECT_DIR$/src/com/PI/MVC/controllers/s.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Label.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Segregation.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Logging/TextAreaHandler.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Logging/MyLogger.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/Logging/MyFormatter.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/InOutMem.java" />
-        <option value="$PROJECT_DIR$/src/Tests/InOutMemTest.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Instruction.java" />
         <option value="$PROJECT_DIR$/src/com/PI/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/PI/load/Compilator.java" />
         <option value="$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java" />
         <option value="$PROJECT_DIR$/src/com/PI/controllers/rootLayoutController.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Label.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Apb.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/WithConst.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/JumpControl.java" />
+        <option value="$PROJECT_DIR$/src/Tests/InOutMemTest.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/InOutMem.java" />
         <option value="$PROJECT_DIR$/src/Tests/CompilatorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Compilator.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Segregation.java" />
         <option value="$PROJECT_DIR$/src/com/PI/load/CodeList.java" />
+        <option value="$PROJECT_DIR$/src/Tests/ApbTest.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/NoArgsOp.java" />
+        <option value="$PROJECT_DIR$/src/Tests/NoArgsOpTest.java" />
+        <option value="$PROJECT_DIR$/src/com/PI/load/Instructions/Instruction.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="41" />
-    <option name="y" value="51" />
-    <option name="width" value="1438" />
-    <option name="height" value="868" />
+    <option name="x" value="1440" />
+    <option name="y" value="-4" />
+    <option name="width" value="1366" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -214,8 +212,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,13 +283,15 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/lib/junit.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Tests" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -307,130 +305,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CompilatorTest">
-    <configuration name="ApbTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+  <component name="RunManager" selected="JUnit.UnittTest">
+    <configuration name="UnittTest" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="PLC_Programmer" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.ApbTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="directory" />
       <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <envs />
-      <patterns />
-    </configuration>
-    <configuration name="CompilatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="PLC_Programmer" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.CompilatorTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="InOutMemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="PLC_Programmer" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.InOutMemTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="NoArgsOpTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="PLC_Programmer" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.NoArgsOpTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="SegregationTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="PLC_Programmer" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.SegregationTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
+      <dir value="$PROJECT_DIR$/src/Tests" />
       <patterns />
     </configuration>
     <configuration name="Unnamed" type="Application" factoryName="Application">
@@ -446,31 +340,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="PLC_Programmer" />
       <envs />
-    </configuration>
-    <configuration name="WithConstTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="PLC_Programmer" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.WithConstTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -615,24 +484,10 @@
       <envs />
       <method />
     </configuration>
-    <list size="7">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.SegregationTest" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Unnamed" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.InOutMemTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.WithConstTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CompilatorTest" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.NoArgsOpTest" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.ApbTest" />
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.Unnamed" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.UnittTest" />
     </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.CompilatorTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ApbTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.InOutMemTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.NoArgsOpTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.WithConstTest" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -648,56 +503,56 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CompilatorTest - 2017.10.09 at 21h 10m 53s.xml">
+    <history-entry file="CompilatorTest - 2017.10.18 at 18h 06m 17s.xml">
       <configuration name="CompilatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompilatorTest - 2017.10.09 at 21h 12m 00s.xml">
+    <history-entry file="CompilatorTest - 2017.10.18 at 18h 07m 52s.xml">
       <configuration name="CompilatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompilatorTest - 2017.10.09 at 21h 13m 23s.xml">
+    <history-entry file="CompilatorTest - 2017.10.18 at 18h 08m 55s.xml">
       <configuration name="CompilatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompilatorTest - 2017.10.09 at 21h 16m 16s.xml">
+    <history-entry file="CompilatorTest - 2017.10.18 at 18h 14m 42s.xml">
       <configuration name="CompilatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompilatorTest - 2017.10.12 at 14h 05m 13s.xml">
-      <configuration name="CompilatorTest" configurationId="JUnit" />
+    <history-entry file="UnittTest - 2017.10.18 at 18h 15m 43s.xml">
+      <configuration name="UnittTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompilatorTest - 2017.10.12 at 14h 05m 46s.xml">
-      <configuration name="CompilatorTest" configurationId="JUnit" />
+    <history-entry file="UnittTest - 2017.10.18 at 18h 16m 08s.xml">
+      <configuration name="UnittTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompilatorTest - 2017.10.12 at 14h 19m 04s.xml">
-      <configuration name="CompilatorTest" configurationId="JUnit" />
+    <history-entry file="UnittTest - 2017.10.18 at 18h 17m 22s.xml">
+      <configuration name="UnittTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SegregationTest - 2017.10.09 at 11h 51m 06s.xml">
-      <configuration name="SegregationTest" configurationId="JUnit" />
+    <history-entry file="UnittTest - 2017.10.18 at 18h 20m 18s.xml">
+      <configuration name="UnittTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SegregationTest - 2017.10.09 at 11h 51m 54s.xml">
-      <configuration name="SegregationTest" configurationId="JUnit" />
+    <history-entry file="UnittTest - 2017.10.18 at 18h 21m 42s.xml">
+      <configuration name="UnittTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SegregationTest - 2017.10.09 at 19h 07m 34s.xml">
-      <configuration name="SegregationTest" configurationId="JUnit" />
+    <history-entry file="UnittTest - 2017.10.18 at 18h 24m 14s.xml">
+      <configuration name="UnittTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="41" y="51" width="1442" height="912" extended-state="6" />
+    <frame x="1440" y="-4" width="1366" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2580645" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25660965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34580645" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3437014" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24390244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26136363" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39813375" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -745,6 +600,74 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Compilator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/CompilatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/CodeList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Postman.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Segregation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#parseInstructionLine#0;class#Segregation#0" expanded="false" />
+            <element signature="method#getInstructionObjectByType#0;class#Segregation#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="58" column="37" lean-forward="false" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/PI/controllers/rootLayoutController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3114">
@@ -762,6 +685,8 @@
           <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -839,6 +764,8 @@
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="43" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -900,6 +827,8 @@
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="43" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -961,6 +890,8 @@
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="43" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1005,26 +936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Postman.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Segregation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#parseInstructionLine#0;class#Segregation#0" expanded="false" />
-            <element signature="method#getInstructionObjectByType#0;class#Segregation#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/PI/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -1035,29 +946,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Compilator.java">
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/Apb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="447">
+          <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/PI/controllers/rootLayoutController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3114">
+        <state relative-caret-position="141">
           <caret line="196" column="41" lean-forward="false" selection-start-line="196" selection-start-column="41" selection-end-line="196" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1066,19 +965,139 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/MVC/controllers/CompileHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/WithConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/InOutMemTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Segregation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="64" column="60" lean-forward="true" selection-start-line="64" selection-start-column="60" selection-end-line="64" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#parseInstructionLine#0;class#Segregation#0" expanded="false" />
+            <element signature="method#getInstructionObjectByType#0;class#Segregation#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Postman.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-468">
+          <caret line="36" column="8" lean-forward="true" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/PI/load/CodeList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+        <state relative-caret-position="288">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Compilator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/ApbTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="47" column="36" lean-forward="false" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Tests/CompilatorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="28">
+          <caret line="107" column="22" lean-forward="false" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/JumpControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/NoArgsOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="63" lean-forward="false" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/NoArgsOpTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/Label.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#311#312#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/InOutMem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/PI/load/Instructions/Instruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#858#859#0" expanded="true" />
+            <element signature="e#913#914#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

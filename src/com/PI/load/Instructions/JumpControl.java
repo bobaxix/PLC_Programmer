@@ -21,14 +21,16 @@ public class JumpControl extends Instruction {
         return codeLine;
     }
 
-    public void whereShouldJump(ArrayList<Instruction> labels){
+    public void whereShouldJump(ArrayList<Instruction> codeLines){
 
         int lineNumber = 0;
-        for(Instruction label : labels){
-            if(operand.equals(((Label) label).getLabel())){
-                lineNumberToJump = label.getInstructionLineNumber() - lineNumber;
+        for(Instruction codeLine : codeLines){
+            if(codeLine.isLabel()) {
+                if (operand.equals(((Label) codeLine).getLabel())) {
+                    lineNumberToJump = codeLine.getInstructionLineNumber() - lineNumber;
+                }
+                lineNumber++;
             }
-            lineNumber++;
         }
     }
 }

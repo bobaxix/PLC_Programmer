@@ -53,12 +53,15 @@ public class Apb extends Instruction {
         if(result){
             int address = getAddress();
 
-            if(checkAddress(address))
+            if(checkAddress(address)) {
                 codeLine.add(orderCode << 24 | address);
+                return codeLine;
+            }
         }
         else
             LOGGER.warning("Line "+instructionLineNumber+": invalid argument");
-        return codeLine;
+
+        return null;
     }
 
     public ArrayList<Integer> getCodeLine(){
