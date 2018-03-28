@@ -1,9 +1,9 @@
 package load;
 
-import com.instructions.Instruction;
-import com.orders.Order;
-import com.orders.OrdersLoader;
-import com.load.Segregation;
+import com.programmer.instructions.Instruction;
+import com.programmer.orders.Order;
+import com.programmer.orders.OrdersLoader;
+import com.programmer.load.Segregation;
 import org.junit.Test;
 
 import java.io.IOException;

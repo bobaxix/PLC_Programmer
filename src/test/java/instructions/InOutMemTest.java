@@ -1,7 +1,7 @@
 package instructions;
 
-import com.instructions.InOutMem;
-import com.instructions.Instruction;
+import com.programmer.instructions.InOutMem;
+import com.programmer.instructions.Instruction;
 import org.junit.Test;
 
 import java.util.ArrayList;

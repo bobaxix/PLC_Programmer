@@ -1,7 +1,7 @@
 package com.controllers;
 
-import com.load.CodeList;
-import com.load.Compiler;
+import com.programmer.load.CodeList;
+import com.programmer.load.Compiler;
 
 import java.io.IOException;
 import java.util.logging.Logger;

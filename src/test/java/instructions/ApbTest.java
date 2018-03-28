@@ -1,6 +1,6 @@
 package instructions;
 
-import com.instructions.Apb;
+import com.programmer.instructions.Apb;
 import org.junit.Test;
 
 import java.util.ArrayList;

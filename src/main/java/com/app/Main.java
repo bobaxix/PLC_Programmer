@@ -3,23 +3,26 @@ package com.app;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.panel.connect.MyThread;
 import com.controllers.RootLayout;
-import com.orders.*;
+import com.programmer.orders.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	/*
+	TO DO:
+	 - initialize SPI only once (in start ? )
+	 */
+	private MyThread myThread;
+
 	public static ArrayList<Order> ordersList;
 	private Stage primaryStage;
-	private GridPane gridPane;
-	private final Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -28,6 +31,9 @@ public class Main extends Application {
 		try{
 			OrdersLoader loader = OrdersLoader.getInstance();
 			ordersList = loader.loadOrdersFromTxtFile();
+			myThread = new MyThread();
+			myThread.setOnSucceeded( value -> myThread.restart());
+
 		}
 		catch(IOException e){
 			System.out.println("Err");
@@ -53,14 +59,18 @@ public class Main extends Application {
 	private void stageStart(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/fxml/root_layout.fxml"));
-			BorderPane borderPane =  loader.load();
+			loader.setLocation(getClass().getResource(
+					"/fxml/root_layout.fxml"));
+			HBox borderPane =  loader.load();
 			borderPane.setFocusTraversable(false);
 			RootLayout controller = loader.getController();
-			controller.getRoot(borderPane);
 			controller.setCommandsList(ordersList);
+			controller.setSpiService(myThread);
 
 			Scene scene = new Scene(borderPane);
+			scene.getStylesheets().add(getClass().getResource(
+					"/css/elevator.css").toExternalForm());
+
 			primaryStage.setScene(scene);
 			primaryStage.setFullScreen(true);
 			primaryStage.setAlwaysOnTop(true);

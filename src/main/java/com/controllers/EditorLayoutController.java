@@ -1,6 +1,6 @@
 package com.controllers;
 
-import com.orders.Order;
+import com.programmer.orders.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

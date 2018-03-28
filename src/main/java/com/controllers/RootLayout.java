@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.orders.Order;
+import com.panel.connect.MyThread;
+import com.panel.view.ViewManager;
+import com.programmer.orders.Order;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,29 +18,37 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.PopupWindow;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 
-public class RootLayout {
+public class RootLayout extends Controller{
 
-	private BorderPane root;
 	private BorderPane textLayout;
 	private BorderPane editorLayout;
-	private HBox startView;
-
 	private textLayoutController textLayoutController;
 	private EditorLayoutController editorLayoutController;
-
 	private ArrayList<Order> ordersList;
-
 	private Runnable backToStart;
+
+	private MyThread myThread;
 
 	@FXML
 	ListView<Path> pathList;
+
+	@FXML
+	BorderPane rootLayout;
+
+	@FXML
+	HBox startView;
+
+	@FXML
+	private BorderPane testLayout;
+
+	@FXML
+	private ChoiceBox<String> visualizationChooser;
+
 
 	ObservableList<Path> fileList = FXCollections.observableArrayList();
 
@@ -68,7 +78,7 @@ public class RootLayout {
 	private void openTextLayout() throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/programming_layout.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/programmer/programming_layout.fxml"));
 		textLayout = loader.load();
 		textLayoutController = loader.getController();
 		textLayoutController.setBackButtonHandle(backToStart);
@@ -76,18 +86,18 @@ public class RootLayout {
 
 	@FXML
 	private void setTextLayout(){
-		root.setCenter(textLayout);
+		rootLayout.setCenter(textLayout);
 	}
 
 	@FXML
 	private void setEditorLayout(){
-		root.setCenter(editorLayout);
+		rootLayout.setCenter(editorLayout);
 		editorLayoutController.setOrderList(ordersList);
 	}
 
 
 	private void backToStartScreen(){
-			root.setCenter(startView);
+			rootLayout.setCenter(startView);
 			refreshFileList();
 	}
 
@@ -107,7 +117,7 @@ public class RootLayout {
 	private void openEditorLayout() throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/editor_Layout.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/programmer/editor_Layout.fxml"));
 		editorLayout = loader.load();
 		editorLayoutController = loader.getController();
 		editorLayoutController.setBackToStart(backToStart);
@@ -160,11 +170,6 @@ public class RootLayout {
 		return sb;
 	}
 
-	public void getRoot(BorderPane root){
-		this.root = root;
-		startView = (HBox) root.getCenter();
-	}
-
 	public void setCommandsList(ArrayList<Order> ordersList){
 	    this.ordersList =  ordersList;
 	    editorLayoutController.setOrderList(ordersList);
@@ -190,6 +195,48 @@ public class RootLayout {
 			return fileName;
 		}
 
+	}
+
+	private void loadElevator() throws IOException{
+		FXMLLoader loader = getFXMLLoader("panel/elevator_layout.fxml");
+		testLayout = getPane(loader);
+		ElevatorController controller = getController((loader));
+		rootLayout.setCenter(testLayout);
+		controller.setBackToStart(() -> {
+			myThread.cancel();
+			myThread.reset();
+			backToStartScreen();
+		});
+		ViewManager vw = new ViewManager("elevator.config");
+		myThread.setViewManager(vw);
+		myThread.start();
+		controller.setViewManager(vw);
+		controller.setActionsForFloorIndicator();
+		controller.setActionsCabinRequests();
+		controller.setActionsControls();
+	}
+
+	public void setSpiService(MyThread thread){
+		this.myThread = thread;
+	}
+
+	@FXML
+	private void loadVisualization(){
+
+		try {
+			switch (visualizationChooser.getValue()) {
+				case "Gantry": {
+					break;
+				}
+				case "Elevator": {
+					loadElevator();
+					break;
+				}
+				default:
+					break;
+			}
+		}
+		catch(IOException e){}
 	}
 
 	private PopupWindow getPopupWindow() {

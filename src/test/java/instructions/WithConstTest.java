@@ -1,7 +1,7 @@
 package instructions;
 
-import com.instructions.Instruction;
-import com.instructions.WithConst;
+import com.programmer.instructions.Instruction;
+import com.programmer.instructions.WithConst;
 import org.junit.Test;
 
 import java.util.ArrayList;

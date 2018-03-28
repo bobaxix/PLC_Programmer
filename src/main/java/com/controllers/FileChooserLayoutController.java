@@ -1,7 +1,6 @@
 package com.controllers;
 
-import com.connect.LoadSaveData;
-import com.controllers.Operation;
+import com.programmer.connect.LoadSaveData;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.FilenameFilter;

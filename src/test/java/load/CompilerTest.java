@@ -1,9 +1,9 @@
 package load;
 
-import com.load.CodeList;
-import com.load.Compiler;
-import com.orders.Order;
-import com.orders.OrdersLoader;
+import com.programmer.load.CodeList;
+import com.programmer.load.Compiler;
+import com.programmer.orders.Order;
+import com.programmer.orders.OrdersLoader;
 import org.junit.Test;
 
 import java.io.IOException;

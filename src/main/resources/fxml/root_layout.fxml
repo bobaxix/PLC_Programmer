@@ -14,16 +14,28 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import java.lang.String?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.60"
 			xmlns:fx="http://javafx.com/fxml/1"
-			fx:controller="com.controllers.RootLayout">
+			fx:controller="com.controllers.RootLayout"
+			fx:id="rootLayout">
 
 	<center>
-		<HBox spacing="10">
+		<HBox fx:id="startView" spacing="10">
 			<padding>
 				<Insets left="10" right="10" top="10" bottom="10"/>
 			</padding>
-		<ListView fx:id="pathList" HBox.hgrow="ALWAYS"/>
+			<VBox spacing="20">
+				<padding>
+					<Insets left="10" right="10" top="10" bottom="10"/>
+				</padding>
+				<ListView fx:id="pathList" HBox.hgrow="ALWAYS"/>
+				<ChoiceBox prefWidth="200" fx:id="visualizationChooser">
+					<String fx:value="Gantry"/>
+					<String fx:value="Elevator"/>
+				</ChoiceBox>
+			</VBox>
 			<VBox spacing="15" alignment="CENTER_RIGHT">
 				<Button onAction="#setTextLayout" prefWidth="80" prefHeight="80">
 					<tooltip>
@@ -70,6 +82,14 @@
 							<image>
 								<Image url="@/icons/edit.png"/>
 							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button mnemonicParsing="false" prefHeight="80" prefWidth="80"
+						onAction="#loadVisualization">
+					<graphic>
+						<ImageView fitHeight="60" fitWidth="60">
+							<Image url="@/icons/start.png"/>
 						</ImageView>
 					</graphic>
 				</Button>

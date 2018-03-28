@@ -1,18 +1,16 @@
 package com.controllers;
 
 
-import com.connect.Postman;
-import com.load.Compiler;
-import com.load.CodeList;
-import com.logging.MyLogger;
-import com.orders.Order;
+import com.programmer.connect.Postman;
+import com.programmer.load.Compiler;
+import com.programmer.load.CodeList;
+import com.programmer.logging.MyLogger;
+import com.programmer.orders.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
@@ -42,7 +40,7 @@ public class textLayoutController {
 	@FXML
 	public void initialize(){
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/file_chooser_layout.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/programmer/file_chooser_layout.fxml"));
 		try {
 			MyLogger.setup(errors);
 			fileChooserPane = loader.load();
