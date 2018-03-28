@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ListView?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60"
+			xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="com.controllers.RootLayout">
+
+	<center>
+		<HBox spacing="10">
+			<padding>
+				<Insets left="10" right="10" top="10" bottom="10"/>
+			</padding>
+		<ListView fx:id="pathList" HBox.hgrow="ALWAYS"/>
+			<VBox spacing="15" alignment="CENTER_RIGHT">
+				<Button onAction="#setTextLayout" prefWidth="80" prefHeight="80">
+					<tooltip>
+						<Tooltip text="Create new project"/>
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="60" fitWidth="60">
+							<image>
+								<Image url="@/icons/newFile.png"/>
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button onAction="#loadExistingProject"  prefWidth="80" prefHeight="80">
+					<tooltip>
+						<Tooltip text="Edit existing project"/>
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="60" fitWidth="60">
+							<image>
+								<Image url="@/icons/openFile.png"/>
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button prefWidth="80" prefHeight="80" onAction="#deleteProject">
+					<tooltip>
+						<Tooltip text="Delete project from your programmer"/>
+					</tooltip>
+					<graphic>
+							<ImageView fitHeight="60" fitWidth="60">
+								<image>
+									<Image url="@/icons/thrash.png"/>
+								</image>
+							</ImageView>
+					</graphic>
+				</Button>
+				<Button onAction="#setEditorLayout"  prefWidth="80" prefHeight="80">
+					<tooltip>
+						<Tooltip text="Edit orders"/>
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="60" fitWidth="60">
+							<image>
+								<Image url="@/icons/edit.png"/>
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button onAction="#closeApp"  prefWidth="80" prefHeight="80">
+					<tooltip>
+						<Tooltip text="Close application"/>
+					</tooltip>
+					<graphic>
+						<ImageView fitHeight="60" fitWidth="60">
+							<image>
+								<Image url="@/icons/exit.png"/>
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+			</VBox>
+		</HBox>
+	</center>
+
+</BorderPane>
