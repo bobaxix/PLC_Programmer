@@ -16,8 +16,8 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.controllers.textLayoutController" fx:id="programmingPane">
    <center>
-      <VBox>
-         <ToolBar focusTraversable="false">
+      <VBox >
+         <ToolBar fx:id="toolbar" focusTraversable="false">
             <Button text="Kompiluj" onAction="#compileProgram"/>
             <Button text="Wyślij do sterownika" onAction="#sendToPlc"/>
             <Button mnemonicParsing="false" text="-" onAction="#minusHandler"/>
@@ -27,7 +27,7 @@
             <Button text="Wróć do menu" onAction="#backButtonHandle"/>
          </ToolBar>
 
-         <TextArea fx:id="textArea" focusTraversable="false" prefWidth="875.0" VBox.vgrow="ALWAYS">
+         <TextArea fx:id="textArea" focusTraversable="false" VBox.vgrow="SOMETIMES">
             <BorderPane.margin>
                <Insets left="40.0" right="40.0" top="20.0" />
             </BorderPane.margin>
@@ -37,7 +37,7 @@
          </TextArea>
 
 
-         <TextArea fx:id="errors" editable="false" maxHeight="-Infinity" minHeight="0.0" prefHeight="100.0" BorderPane.alignment="CENTER">
+         <TextArea fx:id="errors" editable="false" minHeight="0.0" prefHeight="100.0">
             <BorderPane.margin>
                <Insets bottom="20.0" left="40.0" right="40.0" />
             </BorderPane.margin>

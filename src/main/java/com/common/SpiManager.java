@@ -1,17 +1,26 @@
-package com.panel.connect;
+package com.common;
 
+import com.panel.connect.Operation;
 import com.pi4j.io.gpio.*;
 import com.pi4j.wiringpi.Spi;
 
-public class SpiManager {
+public final class SpiManager {
 
-    final private GpioController gpio = GpioFactory.getInstance();
-    final private GpioPinDigitalOutput reset = gpio.provisionDigitalOutputPin(
+    final private GpioPinDigitalOutput reset =
+            GpioFactory.getInstance().provisionDigitalOutputPin(
             RaspiPin.GPIO_06, "Reset", PinState.HIGH);
-    final private GpioPinDigitalOutput nSS = gpio.provisionDigitalOutputPin(
-            RaspiPin.GPIO_10, "nSS", PinState.HIGH);
 
-    public int initializeSpi(){
+    final public static SpiManager instance = new SpiManager();
+
+    private SpiManager(){
+       initializeSpi();
+    }
+
+    public static SpiManager getInstance(){
+        return instance;
+    }
+
+    private int initializeSpi(){
         return Spi.wiringPiSPISetupMode(0, 500000, Spi.MODE_3);
     }
 
@@ -20,6 +29,16 @@ public class SpiManager {
         byte[] dataBuffer = chunkDoubleWordToByteArray(data);
         Spi.wiringPiSPIDataRW(Spi.CHANNEL_0, dataBuffer, 4);
         return foldByteArray(dataBuffer);
+    }
+
+    public void startProgramming() {
+        reset.setState(PinState.LOW);
+        try {
+            Thread.sleep(0,100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        reset.setState(PinState.HIGH);
     }
 
     private byte[] chunkDoubleWordToByteArray(int data){

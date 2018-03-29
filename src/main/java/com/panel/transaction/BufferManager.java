@@ -7,9 +7,9 @@ public class BufferManager {
     private ArrayList<PanelField> buffersList;
     private int[] buffers;
 
-    public BufferManager(ArrayList<PanelField> buffersList){
+    public BufferManager(ArrayList<PanelField> buffersList, int bufferSize){
         this.buffersList = buffersList;
-        buffers = new int[4];
+        buffers = new int[bufferSize];
     }
 
     public void setParameter (String id, int value) throws NullPointerException{

@@ -1,5 +1,6 @@
 package com.panel.connect;
 
+import com.common.SpiManager;
 import com.panel.transaction.BufferManager;
 import com.panel.view.ViewManager;
 import javafx.concurrent.Service;
@@ -16,9 +17,8 @@ public class MyThread extends Service<Void>{
     private ViewManager vm;
     private int control;
 
-    public MyThread(SpiManager spiManager){
-//        spiManager = new SpiManager();
-//        spiManager.initializeSpi();
+    public MyThread(){
+        this.spiManager = SpiManager.getInstance();
 //        control = readControl();
         control = 4;
         buffer = new int[control];
@@ -112,6 +112,10 @@ public class MyThread extends Service<Void>{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getControl() {
+        return control;
     }
 
 }

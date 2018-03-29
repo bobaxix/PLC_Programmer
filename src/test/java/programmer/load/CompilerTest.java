@@ -1,4 +1,4 @@
-package load;
+package programmer.load;
 
 import com.programmer.load.CodeList;
 import com.programmer.load.Compiler;

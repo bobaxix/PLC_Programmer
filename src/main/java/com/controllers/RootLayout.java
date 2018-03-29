@@ -207,7 +207,7 @@ public class RootLayout extends Controller{
 			myThread.reset();
 			backToStartScreen();
 		});
-		ViewManager vw = new ViewManager("elevator.config");
+		ViewManager vw = new ViewManager("elevator.config", myThread.getControl());
 		myThread.setViewManager(vw);
 		myThread.start();
 		controller.setViewManager(vw);
@@ -238,32 +238,5 @@ public class RootLayout extends Controller{
 		}
 		catch(IOException e){}
 	}
-
-	private PopupWindow getPopupWindow() {
-
-		try{
-	    @SuppressWarnings("deprecation")
-	    final Iterator<Window> windows = Window.impl_getWindows();
-
-	    while (windows.hasNext()) {
-	        final Window window = windows.next();
-	        if (window instanceof PopupWindow) {
-	            if(window.getScene()!=null && window.getScene().getRoot()!=null){
-	                Parent root = window.getScene().getRoot();
-	                if(root.getChildrenUnmodifiable().size()>0){
-	                    Node popup = root.getChildrenUnmodifiable().get(0);
-	                    if(popup.lookup(".fxvk")!=null){
-	                        return (PopupWindow)window;
-	                    }
-	                }
-	            }
-	        }
-	    }
-		}
-	        catch(NullPointerException e){}
-	            return null;
-	}
-
-
 
 }

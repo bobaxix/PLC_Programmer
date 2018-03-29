@@ -1,4 +1,4 @@
-package load;
+package programmer.load;
 
 import com.programmer.instructions.Instruction;
 import com.programmer.orders.Order;

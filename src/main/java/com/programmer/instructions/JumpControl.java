@@ -25,7 +25,6 @@ public class JumpControl extends Instruction {
 
         int lineNumber = 0;
         for(Instruction codeLine : codeLines){
-            System.out.println(codeLine);
             if(codeLine.isOpWithConst())
                 lineNumber--;
             if(codeLine.isLabel()) {

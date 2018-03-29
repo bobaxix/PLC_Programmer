@@ -3,6 +3,7 @@ package com.app;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.common.SpiManager;
 import com.panel.connect.MyThread;
 import com.controllers.RootLayout;
 import com.programmer.orders.*;
@@ -15,10 +16,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	/*
-	TO DO:
-	 - initialize SPI only once (in start ? )
-	 */
 	private MyThread myThread;
 
 	public static ArrayList<Order> ordersList;
@@ -61,7 +58,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource(
 					"/fxml/root_layout.fxml"));
-			HBox borderPane =  loader.load();
+			BorderPane borderPane =  loader.load();
 			borderPane.setFocusTraversable(false);
 			RootLayout controller = loader.getController();
 			controller.setCommandsList(ordersList);

@@ -19,11 +19,11 @@ public class ViewManager { ;
     private PropertyManager propertyManager;
     private BufferManager bufferManager;
 
-    public ViewManager(String fileName){
-        loadConfiguration(fileName);
+    public ViewManager(String fileName, int bufferSize){
+        loadConfiguration(fileName, bufferSize);
     }
 
-    private void loadConfiguration(String fileName){
+    private void loadConfiguration(String fileName, int bufferSize){
 
         Matcher matcher;
         String line;
@@ -86,7 +86,8 @@ public class ViewManager { ;
         }
         catch(IOException e){}
 
-        bufferManager = new BufferManager(bufferList);
+
+        bufferManager = new BufferManager(bufferList, bufferSize);
         propertyManager = new PropertyManager(propertyList);
     }
 

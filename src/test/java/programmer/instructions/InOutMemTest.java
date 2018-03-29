@@ -1,4 +1,4 @@
-package instructions;
+package programmer.instructions;
 
 import com.programmer.instructions.InOutMem;
 import com.programmer.instructions.Instruction;

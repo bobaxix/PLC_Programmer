@@ -6,15 +6,26 @@ import com.programmer.load.Compiler;
 import com.programmer.load.CodeList;
 import com.programmer.logging.MyLogger;
 import com.programmer.orders.Order;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.PopupWindow;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class textLayoutController {
 
@@ -24,7 +35,6 @@ public class textLayoutController {
 
 	@FXML
 	private BorderPane programmingPane;
-
 
 	private FileChooserLayoutController fclc;
 
@@ -36,11 +46,14 @@ public class textLayoutController {
 
 	private ArrayList<Order> orderList;
 
+	private PopupWindow keyboard;
 	
 	@FXML
 	public void initialize(){
+
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/fxml/programmer/file_chooser_layout.fxml"));
+		loader.setLocation(getClass().getResource(
+		        "/fxml/programmer/file_chooser_layout.fxml"));
 		try {
 			MyLogger.setup(errors);
 			fileChooserPane = loader.load();
@@ -56,6 +69,8 @@ public class textLayoutController {
 			root.setCenter(programmingPane);
 			errors.clear();
 		});
+
+		textArea.focusedProperty().addListener((ob,b,b1) -> change());
 	}
 
 	@FXML
@@ -114,5 +129,60 @@ public class textLayoutController {
 	public void setProject(StringBuilder sb){
 		textArea.setText(sb.toString());
 	}
+
+	private PopupWindow getPopupWindow() {
+
+		try{
+			@SuppressWarnings("deprecation")
+			final Iterator<Window> windows = Window.impl_getWindows();
+
+			while (windows.hasNext()) {
+				final Window window = windows.next();
+				if (window instanceof PopupWindow) {
+					if(window.getScene()!=null && window.getScene().getRoot()!=null){
+						Parent root = window.getScene().getRoot();
+						if(root.getChildrenUnmodifiable().size()>0){
+							Node popup = root.getChildrenUnmodifiable().get(0);
+							if(popup.lookup(".fxvk")!=null){
+								return (PopupWindow)window;
+							}
+						}
+					}
+				}
+			}
+		}
+		catch(NullPointerException e){}
+		return null;
+	}
+
+	private void change() {
+		try{
+			if(keyboard==null){
+				keyboard = getPopupWindow();
+				double textAreaHeight = textArea.getHeight();
+				double keyboardDown = keyboard.getY();
+
+				keyboard.yProperty().addListener(obs->{
+					Platform.runLater(()->{
+						// x = <0 -> close; 243 - > open>
+						double x = keyboardDown - keyboard.getY();
+						double y = x -100;
+						if(x < 100) {
+							errors.setMaxHeight(100 - x);
+							textArea.setMaxHeight(textAreaHeight);
+						}
+						else {
+							textArea.setMaxHeight(textAreaHeight - y);
+							errors.setMaxHeight(0);
+						}
+					});
+
+				});
+			}
+		}
+		catch(NullPointerException npe){};
+	}
+
+
 }
 
