@@ -21,4 +21,30 @@ public class WithConstTest {
         assertEquals(0x0A000000, (int) code.get(0));
         assertEquals(0x00000161, (int) code.get(1));
     }
+
+    @Test
+    public void generateCodeForHex(){
+        Instruction i = new WithConst();
+        i.set("ANDI", 10, "0x10", 10);
+        ArrayList<Integer> code = i.generateCodeForInstruction();
+        assertEquals(0x0A000000, (int) code.get(0));
+        assertEquals(0x00000010, (int) code.get(1));
+
+    }
+
+    @Test
+    public void generateCodeForHexGreaterThanMax(){
+        Instruction i = new WithConst();
+        i.set("ANDI", 10, "0x1FAAAAFFF", 10);
+        ArrayList<Integer> code = i.generateCodeForInstruction();
+        assertEquals(null, code);
+    }
+
+    @Test
+    public void generateCodeForBadHex(){
+        Instruction i = new WithConst();
+        i.set("ANDI", 10, "0x1FAAAAFG", 10);
+        ArrayList<Integer> code = i.generateCodeForInstruction();
+        assertEquals(null, code);
+    }
 }

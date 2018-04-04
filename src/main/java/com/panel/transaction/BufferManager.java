@@ -24,7 +24,6 @@ public class BufferManager {
 
     private PanelField findBuffer(String id){
         for(PanelField buffer : buffersList){
-            System.out.println("Id: "+id+" getId: "+buffer.getId());
             if(buffer.getId().equals(id))
                 return buffer;
         }

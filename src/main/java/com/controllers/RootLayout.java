@@ -2,7 +2,6 @@ package com.controllers;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.panel.connect.MyThread;
 import com.panel.view.ViewManager;
@@ -13,25 +12,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.PopupWindow;
 import javafx.stage.Screen;
-import javafx.stage.Window;
 
 
 public class RootLayout extends Controller{
 
 	private BorderPane textLayout;
 	private BorderPane editorLayout;
-	private textLayoutController textLayoutController;
+	private TextLayoutController textLayoutController;
 	private EditorLayoutController editorLayoutController;
 	private ArrayList<Order> ordersList;
 	private Runnable backToStart;
-
 	private MyThread myThread;
 
 	@FXML
@@ -87,6 +82,7 @@ public class RootLayout extends Controller{
 	@FXML
 	private void setTextLayout(){
 		rootLayout.setCenter(textLayout);
+		//textLayoutController.clear();
 	}
 
 	@FXML
@@ -202,22 +198,22 @@ public class RootLayout extends Controller{
 		testLayout = getPane(loader);
 		ElevatorController controller = getController((loader));
 		rootLayout.setCenter(testLayout);
+
+		myThread = new MyThread();
+		myThread.setOnSucceeded( value -> myThread.restart());
+
 		controller.setBackToStart(() -> {
 			myThread.cancel();
 			myThread.reset();
 			backToStartScreen();
 		});
-		ViewManager vw = new ViewManager("elevator.config", myThread.getControl());
+		ViewManager vw = new ViewManager("elevator.config");
 		myThread.setViewManager(vw);
 		myThread.start();
 		controller.setViewManager(vw);
 		controller.setActionsForFloorIndicator();
 		controller.setActionsCabinRequests();
 		controller.setActionsControls();
-	}
-
-	public void setSpiService(MyThread thread){
-		this.myThread = thread;
 	}
 
 	@FXML

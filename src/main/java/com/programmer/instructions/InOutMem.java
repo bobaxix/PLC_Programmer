@@ -9,14 +9,14 @@ import java.util.regex.Pattern;
  */
 public class InOutMem extends Instruction {
 
-    private final int MEMORY_BASE = 0x00000040;
-    private final int MEMORY_SIZE = 0x000000BF;
+    private final int MEMORY_BASE = 0x00000080;
+    private final int MEMORY_SIZE = 0x000007F;
 
     private final int INPUT_BASE = 0x00000000;
-    private final int INPUT_SIZE = 0x0000001F;
+    private final int INPUT_SIZE = 0x0000003F;
 
-    private final int OUTPUT_BASE = 0x00000020;
-    private final int OUTPUT_SIZE = 0x0000001F;
+    private final int OUTPUT_BASE = 0x00000040;
+    private final int OUTPUT_SIZE = 0x0000003F;
 
     private String accessSize;
     private char accessType;

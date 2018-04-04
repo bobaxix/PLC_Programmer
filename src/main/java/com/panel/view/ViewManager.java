@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ViewManager { ;
+public class ViewManager {
+
+    /*
+    TO DO: read config files from RasPi, not from .jar file
+     */
 
     String[] regex = {"-? *(label): *(\\w+)$",
                       "-? *(address): *(\\d+.\\d+.\\w+)$"};
@@ -19,14 +23,15 @@ public class ViewManager { ;
     private PropertyManager propertyManager;
     private BufferManager bufferManager;
 
-    public ViewManager(String fileName, int bufferSize){
-        loadConfiguration(fileName, bufferSize);
+    public ViewManager(String fileName){
+        loadConfiguration(fileName);
     }
 
-    private void loadConfiguration(String fileName, int bufferSize){
+    private void loadConfiguration(String fileName){
 
         Matcher matcher;
         String line;
+        int bufferSize = 0;
 
         ArrayList<Property> propertyList = new ArrayList<>();
         ArrayList<PanelField> bufferList = new ArrayList<>();
@@ -79,15 +84,22 @@ public class ViewManager { ;
 
                     if(workman.equalsIgnoreCase("in"))
                         propertyList.add(new Property(label, address));
-                    else if(workman.equalsIgnoreCase("out"))
+                    else if(workman.equalsIgnoreCase("out")){
+                        int bufferNumber = AddressCreator.getBufferLine(address);
+
+                        if(bufferNumber > bufferSize)
+                            bufferSize = bufferNumber;
+
                         bufferList.add(new PanelField(label, address));
+                    }
+
                 }
             }
         }
         catch(IOException e){}
 
-
-        bufferManager = new BufferManager(bufferList, bufferSize);
+        System.out.println("BufferSize = "+(bufferSize+1));
+        bufferManager = new BufferManager(bufferList, bufferSize + 1);
         propertyManager = new PropertyManager(propertyList);
     }
 

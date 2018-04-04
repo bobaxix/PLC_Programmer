@@ -33,12 +33,15 @@ public final class Postman {
 
             spiManager.startProgramming();
             spiManager.sendDoubleWord(numberOfInstructions - 1);
+            soutCode(numberOfInstructions -1);
+
 
             while (numberOfInstructions > 0) {
                 int data = codeList.get(numberOfInstructions);
                 numberOfInstructions--;
                 checksum += data;
                 spiManager.sendDoubleWord(data);
+                soutCode(data);
             }
 
             int checksumPLC = spiManager.sendDoubleWord(checksum);
@@ -54,6 +57,19 @@ public final class Postman {
         }
         else
             LOGGER.warning("Data to send is an empty array!");
+    }
+
+    private void soutCode(int code){
+        for(int z = 31; z >= 0; z--){
+            if(((code >> z) & 0x01) == 1)
+                System.out.print("1");
+            else
+                System.out.print("0");
+            if(z % 8 == 0)
+                System.out.print(" ");
+        }
+
+        System.out.print("\r\n");
     }
     }
 

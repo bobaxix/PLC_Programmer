@@ -22,6 +22,7 @@ public class CompilerTest {
         String code = "AND M0.0 \n" +
                 "JMP skok \n" +
                 "AND M1.0 \n" +
+                "\n"+
                 "skok: \n" +
                 "AND M2.0";
         ArrayList<Order> orderList = OrdersLoader.getInstance().loadOrdersFromTxtFile();
@@ -52,7 +53,7 @@ public class CompilerTest {
         assertEquals(0x00000007, codeList.getCodeListIndexOf(0));
         assertEquals(0x0C000005, (int) codeList.getCodeListIndexOf(1));
         assertEquals(0x0C000001 ,(int) codeList.getCodeListIndexOf(2));
-        assertEquals(0x01000380, (int) codeList.getCodeListIndexOf(3));
+        assertEquals(0x010003C0, (int) codeList.getCodeListIndexOf(3));
         assertEquals(0x0B000000, (int) codeList.getCodeListIndexOf(4));
         assertEquals(0x1E000000, (int) codeList.getCodeListIndexOf(7));
     }

@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class textLayoutController {
+public class TextLayoutController {
 
 
 	@FXML
@@ -108,9 +108,14 @@ public class textLayoutController {
 		codeList = compileHandler.handle(textArea.getText());
 	}
 
-	public  void setOrderList(ArrayList<Order> orderList){
+	public void setOrderList(ArrayList<Order> orderList){
 		this.orderList = orderList;
 	}
+
+	public void clear(){
+	    textArea.clear();
+	    errors.clear();
+    }
 
 	@FXML
 	private void sendToPlc(){

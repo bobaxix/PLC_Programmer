@@ -25,7 +25,7 @@ public class AddressCreator {
                 System.out.println("Number format exception!");
                 return -1;
             }
-            return access | littleAddress << 2 | bufferLine << 5;
+            return access | littleAddress << 2 | bufferLine << 7;
         }
 
         return -1;
@@ -41,5 +41,9 @@ public class AddressCreator {
                 return 0x01;
         }
         return 0;
+    }
+
+    static public int getBufferLine(int address){
+        return address >>> 7;
     }
 }

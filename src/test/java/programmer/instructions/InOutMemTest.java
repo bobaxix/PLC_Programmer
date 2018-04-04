@@ -19,7 +19,7 @@ public class InOutMemTest {
         iom.set("AND",16, "M0.3", 10);
         ArrayList<Integer> code = iom.generateCodeForInstruction();
 
-        assertEquals(0x10000043, (int) code.get(0));
+        assertEquals(0x10000083, (int) code.get(0));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class InOutMemTest {
         iom.set("OR",20, "OW1", 6);
         ArrayList<Integer> code = iom.generateCodeForInstruction();
 
-        assertEquals(0x14000230, (int) code.get(0));
+        assertEquals(0x14000250, (int) code.get(0));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class InOutMemTest {
         iom.set("AND",1, "MD2", 1);
         ArrayList<Integer> code = iom.generateCodeForInstruction();
 
-        assertEquals(0x01000380, (int) code.get(0));
+        assertEquals(0x010003C0, (int) code.get(0));
     }
 
     @Test

@@ -14,7 +14,8 @@
 <BorderPane focusTraversable="true"
             xmlns="http://javafx.com/javafx/8.0.60"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.controllers.textLayoutController" fx:id="programmingPane">
+            fx:controller="com.controllers.TextLayoutController"
+            fx:id="programmingPane">
    <center>
       <VBox >
          <ToolBar fx:id="toolbar" focusTraversable="false">

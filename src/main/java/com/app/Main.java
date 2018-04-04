@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private MyThread myThread;
 
 	public static ArrayList<Order> ordersList;
 	private Stage primaryStage;
@@ -28,8 +27,6 @@ public class Main extends Application {
 		try{
 			OrdersLoader loader = OrdersLoader.getInstance();
 			ordersList = loader.loadOrdersFromTxtFile();
-			myThread = new MyThread();
-			myThread.setOnSucceeded( value -> myThread.restart());
 
 		}
 		catch(IOException e){
@@ -62,7 +59,6 @@ public class Main extends Application {
 			borderPane.setFocusTraversable(false);
 			RootLayout controller = loader.getController();
 			controller.setCommandsList(ordersList);
-			controller.setSpiService(myThread);
 
 			Scene scene = new Scene(borderPane);
 			scene.getStylesheets().add(getClass().getResource(

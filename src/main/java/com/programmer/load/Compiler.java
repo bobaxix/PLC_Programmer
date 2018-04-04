@@ -48,6 +48,8 @@ public class Compiler {
 
 		while((line = br.readLine()) != null){
 
+        if(line.isEmpty())
+            continue;
 
         instruction = segregation.getInstructionObject(line, instructionNumber++);
 

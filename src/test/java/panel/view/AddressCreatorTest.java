@@ -18,8 +18,8 @@ public class AddressCreatorTest {
     @Parameterized.Parameters
     public static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][] {
-                { "1.1.DW", 0x27 }, { "3.5.b", 0x74 },
-                { "2.1.B", 0x45 }, { "0.1.W", 0x06 }
+                { "1.1.DW", 0x87 }, { "3.5.b", 0x194 },
+                { "2.1.B", 0x105 }, { "0.1.W", 0x06 }
         });
     }
 
