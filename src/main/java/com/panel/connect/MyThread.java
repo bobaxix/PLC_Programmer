@@ -90,7 +90,7 @@ public class MyThread extends Service<Void>{
                     }
 
                 vm.getPropertyManager().setProperties(buffer);
-                rest(1000);
+                rest(100);
 
                 System.out.println("------------");
                 return null;

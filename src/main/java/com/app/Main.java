@@ -16,7 +16,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
+    /*
+    TO DO:
+    - load tags from file
+    - add standard masks (ex. for APB REGISTER)
+    - comments on start line
+     */
 	public static ArrayList<Order> ordersList;
 	private Stage primaryStage;
 

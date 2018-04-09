@@ -33,6 +33,11 @@ public class CompilerTest {
     }
 
     @Test
+    public void tagsTest() throws IOException {
+
+    }
+
+    @Test
     public void anotherTestLabels() throws IOException{
 
         String code = "JMP skok1 \n" +
@@ -93,6 +98,7 @@ public class CompilerTest {
                 "APB_WR C0.CU";
 
         ArrayList<Order> orderList = OrdersLoader.getInstance().loadOrdersFromTxtFile();
+        System.out.println(orderList.get(1).getMnemonic());
         Compiler compiler = new Compiler(orderList);
 
         CodeList codeList = compiler.compile(code);

@@ -1,5 +1,7 @@
 package com.programmer.instructions;
 
+import com.programmer.tags.List;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +34,13 @@ public class InOutMem extends Instruction {
 
     private boolean parseOperand(){
 
+//        List tagsList = List.getTagsList();
+//
+//        String t_operand = tagsList.findTag(operand.trim());
+//        if(t_operand.equals(null)){
+//            t_operand = operand;
+//        }
+//        t_operand = operand;
         Pattern pattern = Pattern.compile("(M|I|O)(\\d+|D|W|B)\\.?(\\d?)");
         matcher = pattern.matcher(operand);
         boolean result = matcher.matches();

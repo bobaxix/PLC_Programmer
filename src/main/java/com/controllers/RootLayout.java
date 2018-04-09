@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import com.panel.connect.MyThread;
 import com.panel.view.ViewManager;
 import com.programmer.orders.Order;
+import com.programmer.tags.List;
+import com.programmer.tags.TagLoader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,7 +102,11 @@ public class RootLayout extends Controller{
 	@FXML
 	private void loadExistingProject(){
 		try {
-			StringBuilder sb = getProjectFromSelectedFile();
+            Path filePath = pathList.getSelectionModel().getSelectedItem();
+            String path = filePath.getPath();
+			StringBuilder sb = getProjectFromSelectedFile(path);
+//			List tagList = List.getTagsList();
+//			tagList.setTagList(TagLoader.loadTags(path, filePath.getName()));
 			textLayoutController.setProject(sb);
 			setTextLayout();
 
@@ -152,10 +158,9 @@ public class RootLayout extends Controller{
 
 	}
 
-	private StringBuilder getProjectFromSelectedFile() throws IOException {
+	private StringBuilder getProjectFromSelectedFile(String filePath) throws IOException {
 
-		Path filePath = pathList.getSelectionModel().getSelectedItem();
-		BufferedReader br = new BufferedReader(new FileReader(filePath.getPath()));
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		StringBuilder sb = new StringBuilder();
 		String line = "";
 		while((line = br.readLine()) != null){
@@ -185,6 +190,10 @@ public class RootLayout extends Controller{
 		public String getPath(){
 			return fullPath;
 		}
+
+		public String getName(){
+		    return fileName;
+        }
 
 		@Override
 		public String toString(){

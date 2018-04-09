@@ -6,6 +6,7 @@ import com.programmer.load.Compiler;
 import com.programmer.load.CodeList;
 import com.programmer.logging.MyLogger;
 import com.programmer.orders.Order;
+import com.programmer.tags.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +46,6 @@ public class TextLayoutController {
 	private Runnable backToStart;
 
 	private ArrayList<Order> orderList;
-
 	private PopupWindow keyboard;
 	
 	@FXML
@@ -132,7 +132,7 @@ public class TextLayoutController {
 		backToStart = r;
 	}
 	public void setProject(StringBuilder sb){
-		textArea.setText(sb.toString());
+	    textArea.setText(sb.toString());
 	}
 
 	private PopupWindow getPopupWindow() {

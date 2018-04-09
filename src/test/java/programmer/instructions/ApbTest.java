@@ -12,6 +12,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class ApbTest {
 
+
     @Test
     public void generatedCodeIsEqualForCounterOrder(){
 

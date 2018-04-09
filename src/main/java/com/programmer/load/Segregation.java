@@ -48,6 +48,11 @@ public class Segregation {
 		String orderName = parsedCodeLine[0];
 		String operand = parsedCodeLine[1];
 
+		if(!(orderName == null))
+            orderName =orderName.trim();
+
+		if(!(operand == null))
+		    operand.trim();
 
 		for(Order order : orderList){
 

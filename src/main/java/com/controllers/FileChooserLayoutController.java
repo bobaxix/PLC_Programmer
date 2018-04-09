@@ -178,6 +178,7 @@ public class FileChooserLayoutController {
             filename.setEditable(false);
         else
             filename.setEditable(true);
+        refreshPathList();
     }
 
     public void setTextField(TextArea textArea){
