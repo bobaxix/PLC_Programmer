@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class List{
 
-    static List tagsList = new List();
+    static public List tagsList = new List();
 
     private ArrayList<Tag> tagList = new ArrayList<>();
 
@@ -29,7 +29,6 @@ public class List{
     public String findTag(String tag) {
         if(!tagList.isEmpty()){
             for(Tag t_tag : tagList){
-                System.out.println("tag: "+t_tag.getTag()+" op: "+tag+" adr: "+t_tag.getAddress());
                 if(tag.equals(t_tag.getTag())){
                     return t_tag.getAddress();
                 }

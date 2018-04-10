@@ -88,22 +88,19 @@ public class Apb extends Instruction {
    }
     private boolean matchOperand(){
 
-        String t_operand;
+        String t_operand = operand;
         List tagsList = List.getTagsList();
 
-        if(tagsList.isEmpty())
-            t_operand = operand;
-        else{
-            String[] op = operand.split("\\.");
-            String base = tagsList.findTag(op[0]);
-            System.out.println(base);
-            if(base == null) {
-                t_operand = operand;
+        if(tagsList != null) {
+            if (!tagsList.isEmpty()) {
+                String[] op = operand.split("\\.");
+                String base = tagsList.findTag(op[0]);
+                if (base != null) {
+                    t_operand = base + "." + op[1];
+                }
             }
-            else{
-                t_operand = base+"."+op[1];
-            }
-            }
+        }
+
 
         Pattern pattern;
 

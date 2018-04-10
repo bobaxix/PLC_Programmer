@@ -35,18 +35,16 @@ public class InOutMem extends Instruction {
     private boolean parseOperand(){
 
         List tagsList = List.getTagsList();
-        String t_operand;
+        String t_operand = operand;
 
-        if(tagsList.isEmpty()) {
-            t_operand = operand;
-        }
-        else{
-            t_operand = tagsList.findTag(operand);
-            if(t_operand == null){
-                t_operand = operand;
+        if(tagsList != null) {
+            if (!tagsList.isEmpty()) {
+                t_operand = tagsList.findTag(operand);
+                if (t_operand == null) {
+                    t_operand = operand;
+                }
             }
         }
-
 
         Pattern pattern = Pattern.compile("(M|I|O)(\\d+|D|W|B)\\.?(\\d?)");
         matcher = pattern.matcher(t_operand);

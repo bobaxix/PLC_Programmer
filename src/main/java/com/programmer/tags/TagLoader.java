@@ -19,7 +19,7 @@ public class TagLoader {
                     line = br.readLine();
                 }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                System.out.println("Cannot find tag file!");
             } catch (IOException e) {
                 e.printStackTrace();
             }

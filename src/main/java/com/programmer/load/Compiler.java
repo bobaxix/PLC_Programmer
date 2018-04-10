@@ -55,6 +55,9 @@ public class Compiler {
         if(line.isEmpty())
             continue;
 
+        if(line.startsWith(";"))
+            continue;
+
         instruction = segregation.getInstructionObject(line, instructionNumber++);
 
 			if(instruction == null)
