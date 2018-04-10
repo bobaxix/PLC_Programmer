@@ -103,12 +103,12 @@ public class RootLayout extends Controller{
 	private void loadExistingProject(){
 		try {
             Path filePath = pathList.getSelectionModel().getSelectedItem();
-            String path = filePath.getPath();
-			StringBuilder sb = getProjectFromSelectedFile(path);
-//			List tagList = List.getTagsList();
-//			tagList.setTagList(TagLoader.loadTags(path, filePath.getName()));
-			textLayoutController.setProject(sb);
-			setTextLayout();
+            if(filePath != null){
+                String path = filePath.getPath();
+                StringBuilder sb = getProjectFromSelectedFile(path);
+                textLayoutController.setProject(sb);
+                setTextLayout();
+            }
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -129,15 +129,17 @@ public class RootLayout extends Controller{
 	private void deleteProject(){
 
 		Path path = pathList.getSelectionModel().getSelectedItem();
-		String filePath = path.getPath();
-		String userDirectory = System.getProperty("user.dir");
-		File files = new File(userDirectory);
-		for(File f : files.listFiles()){
-			if(f.getPath().equals(filePath)) {
-				f.delete();
-				fileList.remove(path);
-			}
-		}
+		if(path != null) {
+            String filePath = path.getPath();
+            String userDirectory = System.getProperty("user.dir");
+            File files = new File(userDirectory);
+            for (File f : files.listFiles()) {
+                if (f.getPath().equals(filePath)) {
+                    f.delete();
+                    fileList.remove(path);
+                }
+            }
+        }
 	}
 
 	@FXML
@@ -227,21 +229,23 @@ public class RootLayout extends Controller{
 
 	@FXML
 	private void loadVisualization(){
-
-		try {
-			switch (visualizationChooser.getValue()) {
-				case "Gantry": {
-					break;
-				}
-				case "Elevator": {
-					loadElevator();
-					break;
-				}
-				default:
-					break;
-			}
-		}
-		catch(IOException e){}
+        String chosenValue = visualizationChooser.getValue();
+        if(chosenValue != null) {
+            try {
+                switch (chosenValue) {
+                    case "Gantry": {
+                        break;
+                    }
+                    case "Elevator": {
+                        loadElevator();
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            } catch (IOException e) {
+            }
+        }
 	}
 
 }

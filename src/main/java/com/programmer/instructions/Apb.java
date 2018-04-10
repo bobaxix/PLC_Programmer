@@ -2,6 +2,7 @@ package com.programmer.instructions;
 
 import com.programmer.connect.BridgeRegister;
 import com.programmer.connect.MemoryMap;
+import com.programmer.tags.List;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -87,11 +88,28 @@ public class Apb extends Instruction {
    }
     private boolean matchOperand(){
 
-       Pattern pattern;
+        String t_operand;
+        List tagsList = List.getTagsList();
+
+        if(tagsList.isEmpty())
+            t_operand = operand;
+        else{
+            String[] op = operand.split("\\.");
+            String base = tagsList.findTag(op[0]);
+            System.out.println(base);
+            if(base == null) {
+                t_operand = operand;
+            }
+            else{
+                t_operand = base+"."+op[1];
+            }
+            }
+
+        Pattern pattern;
 
         for(String regularExpr : patterns){
             pattern = Pattern.compile(regularExpr);
-            matcher = pattern.matcher(operand);
+            matcher = pattern.matcher(t_operand);
             if(matcher.matches())
                 return true;
         }

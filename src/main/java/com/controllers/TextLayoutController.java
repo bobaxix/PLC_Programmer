@@ -1,11 +1,13 @@
 package com.controllers;
 
 
+import com.programmer.connect.LoadSaveData;
 import com.programmer.connect.Postman;
 import com.programmer.load.Compiler;
 import com.programmer.load.CodeList;
 import com.programmer.logging.MyLogger;
 import com.programmer.orders.Order;
+import com.programmer.path.ProjectPath;
 import com.programmer.tags.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -24,9 +26,11 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Logger;
 
 public class TextLayoutController {
 
@@ -47,6 +51,8 @@ public class TextLayoutController {
 
 	private ArrayList<Order> orderList;
 	private PopupWindow keyboard;
+
+    private Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 	@FXML
 	public void initialize(){
@@ -88,7 +94,25 @@ public class TextLayoutController {
 	}
 
 	@FXML
-	private void saveButtonHandle(){
+    private void saveButtonHandle(){
+	    try {
+            System.out.println(ProjectPath.getProjectPath().getFullPath());
+            LoadSaveData.saveProject(new File(ProjectPath.getProjectPath().getFullPath()),
+                    textArea.getText());
+        }
+        catch(IOException e){
+	        LOGGER.info("Cannot save file, try \"Save as...\"");
+        };
+    }
+
+    @FXML
+    private void newButtonHandle(){
+	    ProjectPath.getProjectPath().cleanPath();
+	    clear();
+    }
+
+	@FXML
+	private void saveAsButtonHandle(){
 		BorderPane root = (BorderPane) programmingPane.getParent();
 		root.setCenter(fileChooserPane);
 		fclc.setActualOperation(Operation.SAVE);

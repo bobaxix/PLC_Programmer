@@ -1,6 +1,0 @@
-instructions/ApbTest.class
-instructions/WithConstTest.class
-load/SegregationTest.class
-instructions/NoArgsOpTest.class
-load/CompilerTest.class
-instructions/InOutMemTest.class

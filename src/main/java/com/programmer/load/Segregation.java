@@ -22,7 +22,7 @@ public class Segregation {
 	private String[] parseInstructionLine(String line){
 
 		String codeLine = line.split(";")[0];
-		String[] parsedCodeLine = codeLine.split(" ");
+		String[] parsedCodeLine = codeLine.split(" +");
 
 		String orderName = parsedCodeLine[0].trim();
 		ifLabel = orderName.endsWith(":");

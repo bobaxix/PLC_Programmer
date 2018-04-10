@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane focusTraversable="true"
             xmlns="http://javafx.com/javafx/8.0.60"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -19,13 +21,87 @@
    <center>
       <VBox >
          <ToolBar fx:id="toolbar" focusTraversable="false">
-            <Button text="Kompiluj" onAction="#compileProgram"/>
-            <Button text="Wyślij do sterownika" onAction="#sendToPlc"/>
-            <Button mnemonicParsing="false" text="-" onAction="#minusHandler"/>
-            <Button mnemonicParsing="false" text="+" textAlignment="CENTER" onAction="#plusHandler"/>
-            <Button text="Save" onAction="#saveButtonHandle"/>
-            <Button text="Load" onAction="#loadButtonHandle"/>
-            <Button text="Wróć do menu" onAction="#backButtonHandle"/>
+             <Button mnemonicParsing="false" onAction="#newButtonHandle">
+                 <graphic>
+                     <ImageView fitHeight="40" fitWidth="40">
+                         <image>
+                             <Image url="@/icons/newFile.png"/>
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+            <Button onAction="#compileProgram">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/compile.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button onAction="#sendToPlc">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/upload.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#minusHandler">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/font_decr.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#plusHandler">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/font_inc.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+             <Button onAction="#saveButtonHandle">
+                 <graphic>
+                     <ImageView fitHeight="40" fitWidth="40">
+                         <image>
+                             <Image url="@/icons/save.png"/>
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+            <Button onAction="#saveAsButtonHandle">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/save_as.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button onAction="#loadButtonHandle">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/open.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button onAction="#backButtonHandle">
+                <graphic>
+                    <ImageView fitHeight="40" fitWidth="40">
+                        <image>
+                            <Image url="@/icons/back.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
          </ToolBar>
 
          <TextArea fx:id="textArea" focusTraversable="false" VBox.vgrow="SOMETIMES">

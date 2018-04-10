@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.programmer.connect.LoadSaveData;
+import com.programmer.path.ProjectPath;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -88,15 +89,13 @@ public class FileChooserLayoutController {
     private void refreshPathList(){
         pathList.clear();
 
-        FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
+        FilenameFilter filter = (File dir, String name) -> {
                 Path p = Paths.get(dir.getAbsolutePath(), name);
                 if(name.endsWith(".txt") ||
-                        (p.toFile().isDirectory() && !name.startsWith(".")))
+                        (p.toFile().isDirectory() && !name.startsWith("."))
+                        || name.endsWith(".tag"))
                     return true;
                 return false;
-            }
         };
 
         File ff = new File(actualPath.toAbsolutePath().toString());
@@ -135,19 +134,24 @@ public class FileChooserLayoutController {
                     else{
                         warning.setVisible(false);
                         saveFlag = false;
+                        ProjectPath projectPath = ProjectPath.getProjectPath();
+                        projectPath.setProjectPath(f.getParent(), f.getName());
                         okButtonHandle();
                     }
                 }
                 else {
                     okButtonHandle();
+                    ProjectPath projectPath = ProjectPath.getProjectPath();
+                    projectPath.setProjectPath(f.getParent(), f.getName());
                     warning.setVisible(false);
                 }
             }
             else{
-                System.out.println("load");
                 try {
                     String programText = LoadSaveData.loadProject(f).toString();
                     programTextField.setText(programText);
+                    ProjectPath projectPath = ProjectPath.getProjectPath();
+                    projectPath.setProjectPath(f.getParent(), f.getName());
                     closeChoosePane();
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -13,14 +13,17 @@
  S        |  21  | IOM INSTRUCTIONS
  ST       |  4   | IOM INSTRUCTIONS
  STN      |  20  | IOM INSTRUCTIONS
- XOR	  |  3   | IOM INSTRUCTIONS
+ XOR      |  3   | IOM INSTRUCTIONS
  XORN     |  19  | IOM INSTRUCTIONS
+ ANDN     |  17  | IOM INSTRUCTIONS
  JMP      |  12  | JUMP CONTROL
  JMPC     |  13  | JUMP CONTROL
  JMPCN    |  29  | JUMP CONTROL
  NOT      |  11  | NAO
  NOP      |  24  | NAO
+ SR       |  15  | NAO
+ SL       |  31  | NAO
  ANDI     |  8   | OP WITH CONST
  LDI      |  7   | OP WITH CONST
- ORI      |  10  | OP WITH CONST
- XORI     |  7   | OP WITH CONST
+ ORI      |  9   | OP WITH CONST
+ XORI     |  10  | OP WITH CONST

@@ -34,15 +34,22 @@ public class InOutMem extends Instruction {
 
     private boolean parseOperand(){
 
-//        List tagsList = List.getTagsList();
-//
-//        String t_operand = tagsList.findTag(operand.trim());
-//        if(t_operand.equals(null)){
-//            t_operand = operand;
-//        }
-//        t_operand = operand;
+        List tagsList = List.getTagsList();
+        String t_operand;
+
+        if(tagsList.isEmpty()) {
+            t_operand = operand;
+        }
+        else{
+            t_operand = tagsList.findTag(operand);
+            if(t_operand == null){
+                t_operand = operand;
+            }
+        }
+
+
         Pattern pattern = Pattern.compile("(M|I|O)(\\d+|D|W|B)\\.?(\\d?)");
-        matcher = pattern.matcher(operand);
+        matcher = pattern.matcher(t_operand);
         boolean result = matcher.matches();
 
         return result;

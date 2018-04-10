@@ -10,8 +10,8 @@ public abstract class LoadSaveData {
         BufferedReader br = new BufferedReader(new FileReader(path));
         StringBuilder sb = new StringBuilder();
         String line;
-        while((line = br.readLine()) != null)
-            sb.append(line+System.lineSeparator());
+        while ((line = br.readLine()) != null)
+            sb.append(line + System.lineSeparator());
 
         br.close();
         return sb;
@@ -24,7 +24,7 @@ public abstract class LoadSaveData {
         BufferedWriter bw = new BufferedWriter(new FileWriter(path));
 
         String line;
-        while((line = br.readLine()) != null){
+        while ((line = br.readLine()) != null) {
             bw.write(line);
             bw.newLine();
         }

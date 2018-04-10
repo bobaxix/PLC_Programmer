@@ -5,13 +5,16 @@ import com.programmer.instructions.JumpControl;
 import com.programmer.instructions.Label;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.programmer.orders.Order;
+import com.programmer.path.ProjectPath;
 import com.programmer.tags.List;
+import com.programmer.tags.TagLoader;
 
 public class Compiler {
 
@@ -90,6 +93,9 @@ public class Compiler {
 	}
 
 	private CodeList generateBinaryCode(ArrayList<Instruction> instructions){
+
+	    List tagList = List.getTagsList();
+	    tagList.setTagList(TagLoader.loadTags(ProjectPath.getProjectPath().getPath()));
 
 		CodeList codeList = new CodeList();
 		for(Instruction instruction : instructions){
