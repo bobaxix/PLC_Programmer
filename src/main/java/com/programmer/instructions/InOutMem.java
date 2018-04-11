@@ -1,15 +1,17 @@
 package com.programmer.instructions;
 
-import com.programmer.tags.List;
+import com.programmer.orders.Order;
+import com.programmer.tags.TagList;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by bobaxix on 16.09.17.
  */
-public class InOutMem extends Instruction {
+public class InOutMem implements CodeGenerator {
 
     private final int MEMORY_BASE = 0x00000080;
     private final int MEMORY_SIZE = 0x000007F;
@@ -19,6 +21,8 @@ public class InOutMem extends Instruction {
 
     private final int OUTPUT_BASE = 0x00000040;
     private final int OUTPUT_SIZE = 0x0000003F;
+
+    Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String accessSize;
     private char accessType;
@@ -32,14 +36,14 @@ public class InOutMem extends Instruction {
         codeList = new ArrayList<>();
     }
 
-    private boolean parseOperand(){
+    private boolean parseOperand(String operand){
 
-        List tagsList = List.getTagsList();
+        TagList tagsTagList = TagList.getTagList();
         String t_operand = operand;
 
-        if(tagsList != null) {
-            if (!tagsList.isEmpty()) {
-                t_operand = tagsList.findTag(operand);
+        if(tagsTagList != null) {
+            if (!tagsTagList.isEmpty()) {
+                t_operand = tagsTagList.findTag(operand);
                 if (t_operand == null) {
                     t_operand = operand;
                 }
@@ -129,16 +133,17 @@ public class InOutMem extends Instruction {
        else if (accessType == 'O')
            result =  address >= OUTPUT_BASE >> 5 && address <= (OUTPUT_BASE + OUTPUT_SIZE) >> 5;
 
-       if(!result)
-           LOGGER.warning("Line "+instructionLineNumber+": address out of range.");
-
        return result;
    }
 
-    @Override
-    public ArrayList<Integer> generateCodeForInstruction(){
 
-        boolean result = parseOperand();
+    @Override
+    public ArrayList<Integer> generateCode(String operand,
+                                           int orderCode,
+                                           int instructionLine) {
+
+
+        boolean result = parseOperand(operand);
         codeList = new ArrayList<>();
 
         if(result){
@@ -149,16 +154,18 @@ public class InOutMem extends Instruction {
             int baseAddressOffsetCode = convertBaseAdressToOffsetCode();
             int fullAddress = baseAddress + baseAddressOffsetCode;
             int bitAddress = getBitAddress();
-
-            if(checkAddress(fullAddress)) {
+            result = checkAddress(fullAddress);
+            if(result) {
                 int code = (orderCode << 24) | (accessType << 8) | (fullAddress << 5) |
                         (chipSelectCode << 3) | bitAddress;
                 codeList.add(code);
                 return codeList;
             }
+            else
+                LOGGER.warning("Line "+instructionLine+": address out of range.");
         }
         else
-            LOGGER.warning("Line "+instructionLineNumber+": invalid argument");
+            LOGGER.warning("Line "+instructionLine+": invalid argument");
 
         return null;
     }

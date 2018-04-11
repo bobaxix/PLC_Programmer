@@ -6,32 +6,11 @@ import java.util.logging.Logger;
 /**
  * Created by bobaxix on 16.09.17.
  */
-public class WithConst extends Instruction{
+public class WithConst implements CodeGenerator{
 
-    ArrayList<Integer> codeList;
+    Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public WithConst(){
-        isOpWithConst = true;
-    }
-    @Override
-    public ArrayList<Integer> generateCodeForInstruction(){
-
-        try {
-            Integer number = parseOperand();
-            if(number == null)
-                return null;
-
-            codeList = new ArrayList<>();
-            codeList.add(orderCode << 24);
-            codeList.add(number);
-        }
-        catch(NullPointerException e){
-            return null;
-        }
-        return codeList;
-    }
-
-    private Integer parseOperand() throws NumberFormatException{
+    private Integer parseOperand(String operand) throws NumberFormatException{
 
         if(operand.startsWith("#")){
                 String tempOperand = operand.substring(1);
@@ -55,5 +34,24 @@ public class WithConst extends Instruction{
                 LOGGER.warning("Number greater than max!");
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<Integer> generateCode(String operand, int orderCode, int instructionLine) {
+
+        ArrayList<Integer> codeList;
+        try {
+            Integer number = parseOperand(operand);
+            if(number == null)
+                return null;
+
+            codeList = new ArrayList<>();
+            codeList.add(orderCode << 24);
+            codeList.add(number);
+        }
+        catch(NullPointerException e){
+            return null;
+        }
+        return codeList;
     }
 }

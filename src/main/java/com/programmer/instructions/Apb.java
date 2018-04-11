@@ -2,16 +2,18 @@ package com.programmer.instructions;
 
 import com.programmer.connect.BridgeRegister;
 import com.programmer.connect.MemoryMap;
-import com.programmer.tags.List;
+import com.programmer.tags.TagList;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by bobaxix on 20.09.17.
  */
-public class Apb extends Instruction {
+public class Apb implements CodeGenerator {
 
     private String[] parsedOperand;
     private Matcher matcher;
@@ -23,6 +25,24 @@ public class Apb extends Instruction {
                     "TX_FIFO_RA|TX_FIFO_WA|RX_FIFO|RX_FIFO_RA|RX_FIFO_WA)$"
     };
     ArrayList<Integer> codeLine;
+    Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    @Override
+    public ArrayList<Integer> generateCode(String operand, int orderCode, int instructionLine) {
+        boolean result = parseOperand(operand);
+        if(result){
+            int address = getAddress();
+
+            if(checkAddress(address, instructionLine)) {
+                codeLine.add(orderCode << 24 | address);
+                return codeLine;
+            }
+        }
+        else
+            LOGGER.warning("Line "+instructionLine+": invalid argument");
+
+        return null;
+    }
 
     private static class CounterArgs{
         final static int CU = 0;
@@ -55,30 +75,9 @@ public class Apb extends Instruction {
         codeLine = new ArrayList<>();
     }
 
-    @Override
-    public ArrayList<Integer> generateCodeForInstruction(){
-        boolean result = parseOperand();
-        if(result){
-            int address = getAddress();
+   private boolean parseOperand(String operand){
 
-            if(checkAddress(address)) {
-                codeLine.add(orderCode << 24 | address);
-                return codeLine;
-            }
-        }
-        else
-            LOGGER.warning("Line "+instructionLineNumber+": invalid argument");
-
-        return null;
-    }
-
-    public ArrayList<Integer> getCodeLine(){
-        return codeLine;
-    }
-
-   private boolean parseOperand(){
-
-        boolean result = matchOperand();
+        boolean result = matchOperand(operand);
         if(result) {
             int numberOfGroups = matcher.groupCount();
             for (int i = 0; i < numberOfGroups; i++)
@@ -86,27 +85,13 @@ public class Apb extends Instruction {
         }
         return result;
    }
-    private boolean matchOperand(){
-
-        String t_operand = operand;
-        List tagsList = List.getTagsList();
-
-        if(tagsList != null) {
-            if (!tagsList.isEmpty()) {
-                String[] op = operand.split("\\.");
-                String base = tagsList.findTag(op[0]);
-                if (base != null) {
-                    t_operand = base + "." + op[1];
-                }
-            }
-        }
-
+    private boolean matchOperand(String operand){
 
         Pattern pattern;
 
         for(String regularExpr : patterns){
             pattern = Pattern.compile(regularExpr);
-            matcher = pattern.matcher(t_operand);
+            matcher = pattern.matcher(operand);
             if(matcher.matches())
                 return true;
         }
@@ -136,7 +121,7 @@ public class Apb extends Instruction {
         return -1;
     }
 
-    private boolean checkAddress(int address){
+    private boolean checkAddress(int address, int instructionLineNumber){
 
         String baseAddress = parsedOperand[0];
         boolean result = false;

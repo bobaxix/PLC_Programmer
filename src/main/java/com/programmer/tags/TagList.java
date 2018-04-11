@@ -2,13 +2,13 @@ package com.programmer.tags;
 
 import java.util.ArrayList;
 
-public class List{
+public class TagList {
 
-    static public List tagsList = new List();
+    static public TagList tagsList = new TagList();
 
     private ArrayList<Tag> tagList = new ArrayList<>();
 
-    private List(){}
+    private TagList(){}
 
     public void add(Tag tag){
         tagList.add(tag);
@@ -27,17 +27,17 @@ public class List{
     }
 
     public String findTag(String tag) {
-        if(!tagList.isEmpty()){
+        if(tagList != null && !tagList.isEmpty()){
             for(Tag t_tag : tagList){
                 if(tag.equals(t_tag.getTag())){
                     return t_tag.getAddress();
                 }
             }
         }
-        return null;
+        return tag;
     }
 
-    public static List getTagsList(){
+    public static TagList getTagList(){
         return tagsList;
     }
 }

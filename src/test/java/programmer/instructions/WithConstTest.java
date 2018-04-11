@@ -15,18 +15,16 @@ public class WithConstTest {
 
     @Test
     public void generatedCodeIsEqualCodeForConst353(){
-        Instruction wc = new WithConst();
-        wc.set("ANDI", 10, "#353", 10);
-        ArrayList<Integer> code = wc.generateCodeForInstruction();
+        WithConst wc = new WithConst();
+        ArrayList<Integer> code = wc.generateCode("#355", 10, 10 );
         assertEquals(0x0A000000, (int) code.get(0));
-        assertEquals(0x00000161, (int) code.get(1));
+        assertEquals(0x00000163, (int) code.get(1));
     }
 
     @Test
     public void generateCodeForHex(){
-        Instruction i = new WithConst();
-        i.set("ANDI", 10, "0x10", 10);
-        ArrayList<Integer> code = i.generateCodeForInstruction();
+        WithConst wc = new WithConst();
+        ArrayList<Integer> code = wc.generateCode("0x10", 10, 10 );
         assertEquals(0x0A000000, (int) code.get(0));
         assertEquals(0x00000010, (int) code.get(1));
 
@@ -34,17 +32,15 @@ public class WithConstTest {
 
     @Test
     public void generateCodeForHexGreaterThanMax(){
-        Instruction i = new WithConst();
-        i.set("ANDI", 10, "0x1FAAAAFFF", 10);
-        ArrayList<Integer> code = i.generateCodeForInstruction();
+        WithConst wc = new WithConst();
+        ArrayList<Integer> code = wc.generateCode("0x1FAAAAFFF", 10, 10 );
         assertEquals(null, code);
     }
 
     @Test
     public void generateCodeForBadHex(){
-        Instruction i = new WithConst();
-        i.set("ANDI", 10, "0x1FAAAAFG", 10);
-        ArrayList<Integer> code = i.generateCodeForInstruction();
+        WithConst wc = new WithConst();
+        ArrayList<Integer> code = wc.generateCode("0x1FAAAAFG", 10, 10 );
         assertEquals(null, code);
     }
 }

@@ -1,19 +1,19 @@
 package com.programmer.load;
 
+import com.programmer.instructions.CodeFactory;
+import com.programmer.instructions.CodeGenerator;
 import com.programmer.instructions.Instruction;
 import com.programmer.instructions.JumpControl;
-import com.programmer.instructions.Label;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Logger;
+import java.util.List;
 
 import com.programmer.orders.Order;
 import com.programmer.path.ProjectPath;
-import com.programmer.tags.List;
+import com.programmer.tags.TagList;
 import com.programmer.tags.TagLoader;
 
 public class Compiler {
@@ -31,83 +31,57 @@ public class Compiler {
 
 		Segregation segregation = new Segregation(orderList);
 
-		ArrayList<Instruction> codeLinesInInstructionList = makeCodeLineList(segregation, code);
+		boolean result = segregation.parseCode(code);
 
-		error = checkIfLabelsAreRepeated(codeLinesInInstructionList);
+		if(result)
+		    return  generateBinaryCode(segregation);
+        else
+            return null;
 
-		if(!error)
-			return generateBinaryCode(codeLinesInInstructionList);
-
-		return null;
 	}
 
-	private ArrayList<Instruction> makeCodeLineList(Segregation segregation, String code) throws IOException{
+	private CodeList generateBinaryCode(Segregation segregation){
 
-		StringReader sr = new StringReader(code);
-		BufferedReader br = new BufferedReader(sr);
-		ArrayList<Instruction> instructions = new ArrayList<>();
-		String line;
-		int instructionNumber = 0;
-        Instruction instruction;
+        List<Instruction> instructions = segregation.getInstructions();
+        Map<String, Integer> labels = segregation.getLabels();
 
-		while((line = br.readLine()) != null){
-
-        if(line.isEmpty())
-            continue;
-
-        if(line.startsWith(";"))
-            continue;
-
-        instruction = segregation.getInstructionObject(line, instructionNumber++);
-
-			if(instruction == null)
-			    error = true;
-			else
-				instructions.add(instruction);
-		}
-
-		return instructions;
-	}
-
-	private boolean checkIfLabelsAreRepeated(ArrayList<Instruction> codeLines){
-
-		int size = codeLines.size();
-		for(int i = 0; i < size -1; i++){
-
-			if(codeLines.get(i).isLabel()){
-				String firstLabel = ((Label) codeLines.get(i)).getLabel();
-
-				for(int j = i+1; j < size; j++){
-
-					if(codeLines.get(j).isLabel()){
-						String secondLabel = ((Label) codeLines.get(j)).getLabel();
-
-						if(firstLabel.equals(secondLabel)) {
-							LOGGER.warning("Repeated labels in lines " +
-									codeLines.get(i).getInstructionLineNumber() + ""
-									+ " and " + codeLines.get(j).getInstructionLineNumber());
-							error = true;
-						}
-					}
-				}
-			}
-		}
-		return error;
-	}
-
-	private CodeList generateBinaryCode(ArrayList<Instruction> instructions){
-
-	    List tagList = List.getTagsList();
+	    TagList tagList = TagList.getTagList();
 	    tagList.setTagList(TagLoader.loadTags(ProjectPath.getProjectPath().getPath()));
 
 		CodeList codeList = new CodeList();
+        CodeFactory codeFactory = new CodeFactory(labels);
+
+        ArrayList<Integer> codeLine = new ArrayList<>();
+
+        String type;
+        int code = 0;
+
 		for(Instruction instruction : instructions){
 
-			if(instruction.isJump())
+		    type = null;
 
-				((JumpControl) instruction).whereShouldJump(instructions);
+		    for(Order o : orderList){
+		        if(o.getMnemonic().equals(instruction.getOrder())){
+		            type = o.getType();
+		            code = Integer.parseInt(o.getCode());
+		            break;
+                }
+            }
 
-			ArrayList<Integer> codeLine = instruction.generateCodeForInstruction();
+            if(type != null) {
+
+		        String operand = instruction.getOperand();
+		        operand = tagList.findTag(operand);
+                CodeGenerator codeGenerator = codeFactory.codeGenerator(type);
+                codeLine = codeGenerator.generateCode(operand,
+                        code,
+                        instruction.getInstructionLine());
+            }
+            else {
+		        LOGGER.warning("Line "+instruction.getInstructionLine()+": cannot find"+
+                "order");
+                error = true;
+            }
 
             if(codeLine != null)
 				codeList.addCompiledCodeLine(codeLine);

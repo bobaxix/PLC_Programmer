@@ -1,23 +1,63 @@
 package com.programmer.load;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
-import com.programmer.instructions.*;
 import com.programmer.instructions.Instruction;
 import com.programmer.orders.Order;
 
 public class Segregation {
 
-	private ArrayList<Order> orderList;
-	private boolean ifLabel = false;
-	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    private final ArrayList<Order> orderList;
+    private Map<String, Integer> labels = new HashMap<>();
+
+    private List<Instruction> instructions = new ArrayList<>();
+	private int memoryNumber = 0;
+	private int lineNumber = 0;
+	private boolean result;
 
 	public Segregation(ArrayList<Order> orderList){
-		this.orderList = orderList;
-	}
+	    this.orderList = orderList;
+    }
+
+    public Map<String, Integer> getLabels() {
+        return labels;
+    }
+
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public boolean parseCode(String code) throws IOException {
+	    result = true;
+        StringReader sr = new StringReader(code);
+        BufferedReader br = new BufferedReader(sr);
+        String line;
+
+        while((line = br.readLine()) != null){
+
+            if(line.isEmpty())
+                continue;
+
+            if(line.startsWith(";"))
+                continue;
+
+            result = addLine(line);
+            lineNumber++;
+        }
+
+        lineNumber = 0;
+        memoryNumber = 0;
+        return result;
+    }
 
 	private String[] parseInstructionLine(String line){
 
@@ -25,9 +65,6 @@ public class Segregation {
 		String[] parsedCodeLine = codeLine.split(" +");
 
 		String orderName = parsedCodeLine[0].trim();
-		ifLabel = orderName.endsWith(":");
-		orderName = orderName.split(":")[0];
-
 		String operand;
 
 		try{
@@ -42,54 +79,42 @@ public class Segregation {
 		return result;
 	}
 
-	public Instruction getInstructionObject(String line, int lineNumber){
+	private boolean addLine(String line) {
 
-		String[] parsedCodeLine = parseInstructionLine(line);
-		String orderName = parsedCodeLine[0];
-		String operand = parsedCodeLine[1];
+        String[] parsedCodeLine = parseInstructionLine(line);
+        String orderName = parsedCodeLine[0];
+        String operand = parsedCodeLine[1];
 
-		if(!(orderName == null))
-            orderName =orderName.trim();
+        for(Order o : orderList)
+            if(o.getMnemonic().equals(orderName)){
+                if(o.getType().equals("OP WITH CONST"))
+                    memoryNumber += 2;
+                else
+                    memoryNumber++;
+                break;
+            }
 
-		if(!(operand == null))
-		    operand.trim();
 
-		for(Order order : orderList){
+        if (!(orderName == null))
+            orderName = orderName.trim();
 
-			String mnemonic = order.getMnemonic();
-			if(mnemonic.equals(orderName) && !ifLabel){
-				String type = order.getType();
-				int orderCode = Integer.decode(order.getCode());
-				Instruction instruction = getInstructionObjectByType(type);
-				instruction.set(orderName, orderCode, operand, lineNumber);
-				return instruction;
-			}
-		}
+        if (!(operand == null))
+            operand.trim();
 
-		if(operand == null && ifLabel) {
-            Instruction instruction = new Label();
-            instruction.set(orderName,lineNumber);
-            return instruction;
+        if (orderName.endsWith(":")) {
+            String label = orderName.split(":")[0].trim();
+            if (!labels.containsKey(label)) {
+                labels.put(label, memoryNumber);
+            }
+            else {
+                LOGGER.warning("Line "+lineNumber+": same label!");
+                return false;
+            }
+
+        } else {
+            instructions.add(new Instruction(orderName, operand, lineNumber));
         }
+        return result;
+    }
 
-        LOGGER.log(new LogRecord(Level.WARNING, "Line "+lineNumber+" : invalid order."));
-		return null;
-	}
-
-	private Instruction getInstructionObjectByType(String type){
-		switch(type){
-			case("IOM INSTRUCTIONS"):
-				return new InOutMem();
-			case("NAO"):
-				return new NoArgsOp();
-			case("JUMP CONTROL"):
-				return new JumpControl();
-			case("OP WITH CONST"):
-				return new WithConst();
-			case("APB"):
-				return new Apb();
-			default:
-				return null;
-		}
-	}
 }

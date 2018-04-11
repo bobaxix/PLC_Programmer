@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import com.panel.connect.MyThread;
 import com.panel.view.ViewManager;
 import com.programmer.orders.Order;
-import com.programmer.tags.List;
-import com.programmer.tags.TagLoader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,7 +82,6 @@ public class RootLayout extends Controller{
 	@FXML
 	private void setTextLayout(){
 		rootLayout.setCenter(textLayout);
-		//textLayoutController.clear();
 	}
 
 	@FXML

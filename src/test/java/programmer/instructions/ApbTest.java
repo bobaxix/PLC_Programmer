@@ -17,48 +17,44 @@ public class ApbTest {
     public void generatedCodeIsEqualForCounterOrder(){
 
         Apb apb = new Apb();
-        apb.set("APB_WR", 0x32, "C1.CV", 10);
-        apb.generateCodeForInstruction();
-        assertEquals(0x3200000D, (int) apb.getCodeLine().get(0));
+        ArrayList<Integer> code = apb.generateCode("C1.CV", 0x32, 10);
+        assertEquals(0x3200000D, (int) code.get(0));
     }
 
     @Test
     public void generatedCodeIsEqualForTimerOrder(){
 
         Apb apb = new Apb();
-        apb.set("APB_WR", 0x56, "T2.ET", 10);
-        apb.generateCodeForInstruction();
-        assertEquals(0x56000814, (int) apb.getCodeLine().get(0));
+        ArrayList<Integer> code = apb.generateCode("T2.ET", 0x56, 10);
+        assertEquals(0x56000814, (int) code.get(0));
     }
 
     @Test
     public void generatedCodeIsEqualForInputOrder(){
 
         Apb apb = new Apb();
-        apb.set("APB_WR", 0x56, "IN", 10);
-        apb.generateCodeForInstruction();
-        assertEquals(0x56001800, (int) apb.getCodeLine().get(0));
+        ArrayList<Integer> code = apb.generateCode("IN", 0x56, 10);
+        assertEquals(0x56001800, (int) code.get(0));
     }
 
     @Test
     public void cannotGeneratedCodeForInvaildArg(){
 
         Apb apb = new Apb();
-        apb.set("APB_WR", 0x56, "X2.CC", 10);
-        ArrayList<Integer> codeLine = apb.generateCodeForInstruction();
-        assertEquals(null, codeLine);
+        ArrayList<Integer> code = apb.generateCode("X2.CC", 0x56, 10);
+        assertEquals(null, code);
     }
 
     @Test
     public void generateCodeIsEqualForBridge(){
         Apb apb = new Apb();
-        apb.set("APB_WR", 0x11, "BR.STATUS", 13);
-        apb.generateCodeForInstruction();
-        assertEquals(0x1100100C, (int) apb.getCodeLine().get(0));
+        ArrayList<Integer> code = apb.generateCode("BR.STATUS",
+                0x11,
+                10);
+        assertEquals(0x1100100C, (int) code.get(0));
 
         apb = new Apb();
-        apb.set("APB_RD", 0x10, "BR.RESET", 14);
-        apb.generateCodeForInstruction();
-        assertEquals(0x10001028, (int) apb.getCodeLine().get(0));
+        code = apb.generateCode("BR.RESET", 0x10, 10);
+        assertEquals(0x10001028, (int) code.get(0));
     }
 }

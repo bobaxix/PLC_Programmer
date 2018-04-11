@@ -8,22 +8,18 @@ import com.programmer.load.CodeList;
 import com.programmer.logging.MyLogger;
 import com.programmer.orders.Order;
 import com.programmer.path.ProjectPath;
-import com.programmer.tags.List;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableDoubleValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.PopupWindow;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -45,7 +41,7 @@ public class TextLayoutController {
 
 	private GridPane fileChooserPane;
 
-	private CodeList codeList;
+	private CompileHandler compileHandler;
 
 	private Runnable backToStart;
 
@@ -96,7 +92,8 @@ public class TextLayoutController {
 	@FXML
     private void saveButtonHandle(){
 	    try {
-            System.out.println(ProjectPath.getProjectPath().getFullPath());
+	        if(ProjectPath.getProjectPath().getLastFilename() == null)
+	            throw new IOException();
             LoadSaveData.saveProject(new File(ProjectPath.getProjectPath().getFullPath()),
                     textArea.getText());
         }
@@ -128,8 +125,9 @@ public class TextLayoutController {
 	@FXML
 	private void compileProgram(){
 		errors.clear();
-		CompileHandler compileHandler = new CompileHandler(new Compiler(orderList));
-		codeList = compileHandler.handle(textArea.getText());
+		compileHandler = new CompileHandler(new Compiler(orderList));
+		compileHandler.handle(textArea.getText());
+
 	}
 
 	public void setOrderList(ArrayList<Order> orderList){
@@ -142,7 +140,8 @@ public class TextLayoutController {
     }
 
 	@FXML
-	private void sendToPlc(){
+	private void sendToPlc()
+    {   CodeList codeList = compileHandler.getFullCode();
 		Postman postman = Postman.getInstance();
 		postman.sendCode(codeList);
 	}
@@ -150,6 +149,8 @@ public class TextLayoutController {
 	@FXML
 	private void backButtonHandle(){
 		backToStart.run();
+		clear();
+		ProjectPath.getProjectPath().cleanPath();
 	}
 
 	public void setBackButtonHandle(Runnable r){

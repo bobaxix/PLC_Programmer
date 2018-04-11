@@ -2,6 +2,7 @@ package programmer.instructions;
 
 import com.programmer.instructions.InOutMem;
 import com.programmer.instructions.Instruction;
+import com.programmer.instructions.NoArgsOp;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,10 +16,9 @@ public class NoArgsOpTest {
 
     @Test
     public void generatedCodeIsEqualCode(){
-        Instruction iom = new InOutMem();
-        iom.set("NOT",11, "", 10);
-        ArrayList<Integer> code = iom.generateCodeForInstruction();
+        NoArgsOp nap = new NoArgsOp();
+        ArrayList<Integer> code = nap.generateCode(null, 11, 10);
 
-        assertEquals(null, code);
+        assertEquals(0x0B000000, (int) code.get(0));
     }
 }
