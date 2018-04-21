@@ -59,7 +59,7 @@ public class MyThread extends Service<Void>{
                 // Send data to bridge
                 if((status & Status.SPI_EMPTY) != 0 ) {
                     BufferManager nbm = vm.getBufferManager();
-                    int[] buffers = nbm.getBuffers();
+                    int[] buffers = nbm.getSumarizeBuffer();
                     int i;
                     synchronized (buffers) {
                         int size;

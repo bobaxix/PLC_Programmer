@@ -79,7 +79,7 @@ public class Compiler {
             }
             else {
 		        LOGGER.warning("Line "+instruction.getInstructionLine()+": cannot find"+
-                "order");
+                " order");
                 error = true;
             }
 

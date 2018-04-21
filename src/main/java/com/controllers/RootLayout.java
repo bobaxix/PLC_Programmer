@@ -1,6 +1,8 @@
 package com.controllers;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.panel.connect.MyThread;
@@ -13,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.PopupWindow;
@@ -28,9 +32,10 @@ public class RootLayout extends Controller{
 	private ArrayList<Order> ordersList;
 	private Runnable backToStart;
 	private MyThread myThread;
+    private Path actualPath;
 
 	@FXML
-	ListView<Path> pathList;
+	ListView<String> pathListView;
 
 	@FXML
 	BorderPane rootLayout;
@@ -45,7 +50,7 @@ public class RootLayout extends Controller{
 	private ChoiceBox<String> visualizationChooser;
 
 
-	ObservableList<Path> fileList = FXCollections.observableArrayList();
+	ObservableList<String> pathList;
 
 	private PopupWindow keyboard;
 
@@ -54,6 +59,10 @@ public class RootLayout extends Controller{
 
 	@FXML
 	private void initialize(){
+
+	    actualPath = new File(System.getProperty("user.dir")).toPath();
+
+	    pathList = FXCollections.observableArrayList();
 
 		backToStart = () -> backToStartScreen();
 
@@ -65,7 +74,34 @@ public class RootLayout extends Controller{
 		}
 
 		refreshFileList();
-		pathList.setItems(fileList);
+
+        pathListView.setCellFactory(param -> new ListCell<String>(){
+            private ImageView imageView = new ImageView();
+            @Override
+            public void updateItem(String name, boolean empty){
+                super.updateItem(name, empty);
+                pathListView.getSelectionModel().selectFirst();
+                Image i;
+                if(empty){
+                    setText(null);
+                    setGraphic(null);
+                }
+                else{
+                    File f = Paths.get(actualPath.toAbsolutePath().toString() ,name).toFile();
+                    if(f.isDirectory())
+                        i = new Image(getClass().getResource("/icons/folder.png").toString());
+                    else
+                        i = new Image(getClass().getResource("/icons/file.png").toString());
+
+                    imageView.setImage(i);
+
+                    setText(name);
+                    setGraphic(imageView);
+                }
+            }
+        });
+
+		pathListView.setItems(pathList);
 
 
 	}
@@ -92,6 +128,7 @@ public class RootLayout extends Controller{
 
 
 	private void backToStartScreen(){
+            actualPath = new File(System.getProperty("user.dir")).toPath();
 			rootLayout.setCenter(startView);
 			refreshFileList();
 	}
@@ -99,19 +136,27 @@ public class RootLayout extends Controller{
 	@FXML
 	private void loadExistingProject(){
 		try {
-            Path filePath = pathList.getSelectionModel().getSelectedItem();
+            String filePath = actualPath.toAbsolutePath().toString() +
+                    File.separator +
+                    pathListView.getSelectionModel().getSelectedItem();
+            File f = new File(filePath);
             if(filePath != null){
-                String path = filePath.getPath();
-                StringBuilder sb = getProjectFromSelectedFile(path);
-                textLayoutController.setProject(sb);
-                setTextLayout();
+                if(f.isDirectory()) {
+                    actualPath = f.toPath();
+                    refreshFileList();
+                }
+                else {
+                    StringBuilder sb = getProjectFromSelectedFile(
+                            new File(filePath).getAbsolutePath());
+                    textLayoutController.setProject(sb);
+                    setTextLayout();
+                }
             }
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	private void openEditorLayout() throws IOException {
 
@@ -125,15 +170,13 @@ public class RootLayout extends Controller{
 	@FXML
 	private void deleteProject(){
 
-		Path path = pathList.getSelectionModel().getSelectedItem();
+		String path = pathListView.getSelectionModel().getSelectedItem();
 		if(path != null) {
-            String filePath = path.getPath();
-            String userDirectory = System.getProperty("user.dir");
-            File files = new File(userDirectory);
+            File files = actualPath.toFile();
             for (File f : files.listFiles()) {
-                if (f.getPath().equals(filePath)) {
+                if (f.getPath().equals(path)) {
                     f.delete();
-                    fileList.remove(path);
+                    pathList.remove(path);
                 }
             }
         }
@@ -144,18 +187,21 @@ public class RootLayout extends Controller{
 		Platform.exit();
 	}
 
-	private void refreshFileList(){
+    private void refreshFileList(){
+        pathList.clear();
+        FilenameFilter filter = (File dir, String name) -> {
+            Path p = Paths.get(dir.getAbsolutePath(), name);
+            if(name.endsWith(".txt") ||
+                    (p.toFile().isDirectory() && !name.startsWith("."))
+                    || name.endsWith(".tag"))
+                return true;
+            return false;
+        };
 
-		fileList.clear();
-
-		String userDirectory = System.getProperty("user.dir");
-		File files = new File(userDirectory);
-		for(File f : files.listFiles()){
-			if(f.getName().endsWith(".txt"))
-				fileList.add(new Path(f.getPath(),f.getName()));
-		}
-
-	}
+        File ff = new File(actualPath.toAbsolutePath().toString());
+        for(File f : ff.listFiles(filter))
+            pathList.add(f.getName());
+    }
 
 	private StringBuilder getProjectFromSelectedFile(String filePath) throws IOException {
 
@@ -174,31 +220,6 @@ public class RootLayout extends Controller{
 	    this.ordersList =  ordersList;
 	    editorLayoutController.setOrderList(ordersList);
 	    textLayoutController.setOrderList(ordersList);
-	}
-
-	public class Path{
-
-		String fullPath;
-		String fileName;
-
-		public Path(String path, String name){
-			this.fullPath = path;
-			this.fileName = name;
-		}
-
-		public String getPath(){
-			return fullPath;
-		}
-
-		public String getName(){
-		    return fileName;
-        }
-
-		@Override
-		public String toString(){
-			return fileName;
-		}
-
 	}
 
 	private void loadElevator() throws IOException{
@@ -245,4 +266,12 @@ public class RootLayout extends Controller{
         }
 	}
 
+    @FXML
+    private void goUpWithDirectory(){
+        try {
+            actualPath = actualPath.toAbsolutePath().getParent();
+            refreshFileList();
+        }
+        catch(NullPointerException n){}
+    }
 }

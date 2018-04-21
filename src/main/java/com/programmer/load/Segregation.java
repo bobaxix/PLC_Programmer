@@ -44,6 +44,7 @@ public class Segregation {
 
         while((line = br.readLine()) != null){
 
+            lineNumber++;
             if(line.isEmpty())
                 continue;
 
@@ -51,7 +52,6 @@ public class Segregation {
                 continue;
 
             result = addLine(line);
-            lineNumber++;
         }
 
         lineNumber = 0;

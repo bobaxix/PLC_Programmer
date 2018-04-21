@@ -6,10 +6,12 @@ public class BufferManager {
 
     private ArrayList<PanelField> buffersList;
     private int[] buffers;
+    private int[] toggleBuffer;
 
     public BufferManager(ArrayList<PanelField> buffersList, int bufferSize){
         this.buffersList = buffersList;
         buffers = new int[bufferSize];
+        toggleBuffer = new int[bufferSize];
     }
 
     public void setParameter (String id, int value) throws NullPointerException{
@@ -18,8 +20,25 @@ public class BufferManager {
                 buffers, buffer.getAccessType());
     }
 
+    public void setValue (String id, int value) throws NullPointerException{
+        PanelField buffer = findBuffer(id);
+        BufferReaderWriter.set(buffer.getAddress(), value,
+                toggleBuffer, buffer.getAccessType());
+    }
+
+
     public int[] getBuffers(){
         return buffers;
+    }
+
+    public int[] getToggleBuffer() {return toggleBuffer;}
+
+    public int[] getSumarizeBuffer(){
+        int[] data = new int[buffers.length];
+        for(int x = 0; x < data.length; x++){
+            data[x] = buffers[x] | toggleBuffer[x];
+        }
+        return data;
     }
 
     private PanelField findBuffer(String id){
