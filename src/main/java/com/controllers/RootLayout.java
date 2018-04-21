@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.panel.connect.MyThread;
 import com.panel.view.ViewManager;
 import com.programmer.orders.Order;
+import com.programmer.path.ProjectPath;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -146,6 +147,7 @@ public class RootLayout extends Controller{
                     refreshFileList();
                 }
                 else {
+                    ProjectPath.getProjectPath().setPath(f.getParent());
                     StringBuilder sb = getProjectFromSelectedFile(
                             new File(filePath).getAbsolutePath());
                     textLayoutController.setProject(sb);
