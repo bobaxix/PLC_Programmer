@@ -20,7 +20,7 @@ public class BufferManager {
                 buffers, buffer.getAccessType());
     }
 
-    public void setValue (String id, int value) throws NullPointerException{
+    public void setToggleBuffer (String id, int value) throws NullPointerException{
         PanelField buffer = findBuffer(id);
         BufferReaderWriter.set(buffer.getAddress(), value,
                 toggleBuffer, buffer.getAccessType());

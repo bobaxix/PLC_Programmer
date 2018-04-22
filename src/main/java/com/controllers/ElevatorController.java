@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -24,6 +25,9 @@ public class ElevatorController {
     @FXML
     ArrayList<Rectangle> controls;
 
+    @FXML
+    CheckBox serviceBox;
+
     private Runnable backToStart;
     private ViewManager vw;
 
@@ -34,7 +38,6 @@ public class ElevatorController {
         }
         for(Button button : buttons)
             button.getStyleClass().add("buttonsInactive");
-        System.out.println("Initialize elevator");
     }
 
     @FXML
@@ -75,6 +78,7 @@ public class ElevatorController {
     }
 
     public void setActionsControls(){
+
         PropertyManager propertyManager = vw.getPropertyManager();
         for(Rectangle r : controls){
             String id = r.getId();
@@ -87,6 +91,16 @@ public class ElevatorController {
                         r.setFill(Color.valueOf("#353634"));
                 });
         }
+
+        serviceBox.selectedProperty().addListener((obVal, oldVal, newVal) -> {
+            BufferManager bm = vw.getBufferManager();
+            if(newVal == true){
+                bm.setToggleBuffer(serviceBox.getId(), 1);
+            }
+            else{
+                bm.setToggleBuffer(serviceBox.getId(), 0);
+            }
+        });
     }
 
     public void setActionsCabinRequests() {

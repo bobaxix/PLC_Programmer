@@ -1,5 +1,6 @@
 package com.controllers;
 
+import com.common.FileManager;
 import com.programmer.connect.LoadSaveData;
 import com.programmer.path.ProjectPath;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,9 +31,7 @@ public class FileChooserLayoutController {
     @FXML
     private Label warning;
 
-    private Path actualPath;
-    private final Path START_PATH = Paths.get("");
-    private ObservableList<String> pathList;
+    private FileManager fileManager;
     private Operation operationToDo;
     private TextArea programTextField;
     private Runnable backToPrevious;
@@ -44,14 +43,13 @@ public class FileChooserLayoutController {
     @FXML
     public void initialize(){
 
-        actualPath = START_PATH;
-        pathList = FXCollections.observableArrayList();
-        refreshPathList();
+        fileManager = new FileManager();
         fileListView.setCellFactory(param -> new ListCell<String>(){
             private ImageView imageView = new ImageView();
             @Override
             public void updateItem(String name, boolean empty){
                 super.updateItem(name, empty);
+                Path actualPath = fileManager.getActualPath();
                 fileListView.getSelectionModel().selectFirst();
                 Image i;
                 if(empty){
@@ -73,6 +71,7 @@ public class FileChooserLayoutController {
             }
         });
 
+        ObservableList<String> pathList = fileManager.getPathList();
         fileListView.setItems(pathList);
 
         fileListView.getSelectionModel().selectedItemProperty().
@@ -80,54 +79,68 @@ public class FileChooserLayoutController {
             filename.setText(newValue);
         } );
 
+        Path actualPath = fileManager.getActualPath();
         localizationProperty = new SimpleStringProperty(actualPath.toAbsolutePath().toString());
 
         localization.textProperty().bind(localizationProperty);
 
     }
 
-    private void refreshPathList(){
-        pathList.clear();
-
-        FilenameFilter filter = (File dir, String name) -> {
-                Path p = Paths.get(dir.getAbsolutePath(), name);
-                if(name.endsWith(".txt") ||
-                        (p.toFile().isDirectory() && !name.startsWith("."))
-                        || name.endsWith(".tag"))
-                    return true;
-                return false;
-        };
-
-        File ff = new File(actualPath.toAbsolutePath().toString());
-        for(File f : ff.listFiles(filter))
-            pathList.add(f.getName());
-    }
-
     @FXML
     private void goUpWithDirectory(){
         try {
-            actualPath = actualPath.toAbsolutePath().getParent();
+            Path actualPath = fileManager.getActualPath().toAbsolutePath().getParent();
+            fileManager.setActualPath(actualPath);
             localizationProperty.set(actualPath.toAbsolutePath().toString());
             saveFlag = false;
             warning.setVisible(false);
-            refreshPathList();
         }
         catch(NullPointerException n){}
     }
 
+    @FXML void addDirectory(){
+        String actualPath = fileManager.getActualPath().toAbsolutePath().toString();
+        String dirName = filename.getText();
+        File f = new File(actualPath);
+        boolean isRepeated = false;
+        if(dirName != null){
+            for(File ff : f.listFiles()){
+                if(ff.getName().equals(dirName)){
+                    isRepeated = true;
+                    warning.setText("Directory exists!");
+                    warning.setVisible(true);
+                    break;
+                }
+            }
+            if(!isRepeated) {
+                warning.setVisible(false);
+                f = new File(actualPath+File.separator+dirName);
+                f.mkdir();
+                fileManager.refreshFileList();
+            }
+        }
+    }
+
+    @FXML
+    private void delete(){
+        String name = fileListView.getSelectionModel().getSelectedItem();
+        fileManager.delete(name);
+        warning.setVisible(false);
+    }
     @FXML
     private void openButtonHandle(){
         File f = getSelectedFile();
 
         if(f.isDirectory()){
-            actualPath = f.toPath();
+            Path actualPath = f.toPath();
+            fileManager.setActualPath(actualPath);
             localizationProperty.set(actualPath.toAbsolutePath().toString());
-            refreshPathList();
         }
         else{
             if(operationToDo == Operation.SAVE){
                 if(f.exists()){
                     if(saveFlag == false){
+                        warning.setText("File exists. Overwrite?");
                         warning.setVisible(true);
                         saveFlag = true;
                     }
@@ -173,6 +186,7 @@ public class FileChooserLayoutController {
 
     private File getSelectedFile(){
         String name = filename.getText();
+        Path actualPath = fileManager.getActualPath();
         return Paths.get(actualPath.toAbsolutePath().toString(), name).toFile();
     }
 
@@ -182,7 +196,6 @@ public class FileChooserLayoutController {
             filename.setEditable(false);
         else
             filename.setEditable(true);
-        refreshPathList();
     }
 
     public void setTextField(TextArea textArea){

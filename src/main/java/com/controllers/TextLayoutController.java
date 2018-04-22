@@ -156,8 +156,8 @@ public class TextLayoutController {
 	public void setBackButtonHandle(Runnable r){
 		backToStart = r;
 	}
-	public void setProject(StringBuilder sb){
-	    textArea.setText(sb.toString());
+	public void setProject(String sb){
+	    textArea.setText(sb);
 	}
 
 	private PopupWindow getPopupWindow() {
