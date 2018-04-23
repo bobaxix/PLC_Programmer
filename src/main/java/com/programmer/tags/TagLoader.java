@@ -4,7 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class TagLoader {
-
+/*TO DO:
+        - add trailing spaces validator
+        - comments in tag file
+  */
     static public ArrayList<Tag> loadTags(String path){
         if(pathValidator(path)) {
             ArrayList<Tag> tagList = new ArrayList<>();

@@ -26,26 +26,6 @@ public class MyThread extends Service<Void>{
             @Override
             protected Void call() throws Exception {
 
-//                    BufferManager nbm = vm.getBufferManager();
-//                    int[] buffers = nbm.getBuffers();
-//                    synchronized (buffers) {
-//                        for (int i = 0; i < control; i++)
-//                            spiManager.sendDoubleWord(buffers[i]);
-//                    }
-//                nbm.clean();
-//
-//                for (int i = 0; i < control; i++) {
-//                    buffer[i] = spiManager.sendDoubleWord(0);
-//                    System.out.println("Received data " + i + ": " + buffer[i]);
-//                }
-//
-//                buffer[0] = 0xFF;
-//                vm.getPropertyManager().setProperties(buffer);
-//                rest(1000);
-//
-//                System.out.println("TRANSMISSION");
-//                return null;
-
                 int status = readStatus();
                 System.out.print("Status: ");
                 for(int z = 7; z >= 0; z--){

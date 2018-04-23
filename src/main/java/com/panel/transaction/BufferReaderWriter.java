@@ -31,8 +31,8 @@ public abstract class BufferReaderWriter {
     }
 
     private static void setBit(int address, int value, int[] buffer) {
-        int bitNumber = ((address >>> LITTLE_ADR_POS) & 0x07);
-        int regNumber = ((address >>> REG_POS) & 0x07);
+        int bitNumber = ((address >>> LITTLE_ADR_POS) & 0x1F);
+        int regNumber = ((address >>> REG_POS));
 
         if (value == 0)
             buffer[regNumber] &= ~(1 << bitNumber);
@@ -41,10 +41,10 @@ public abstract class BufferReaderWriter {
     }
 
     private static int getBit(int[] buffer, int address) {
-        int bitNumber = ((address >>> LITTLE_ADR_POS) & 0x07);
-        int regNumber = ((address >>> REG_POS) & 0x07);
+        int bitNumber = ((address >>> LITTLE_ADR_POS) & 0x1F);
+        int regNumber = ((address >>> REG_POS));
 
-        return (buffer[regNumber] >>> bitNumber) & 0x01;
+        return ((buffer[regNumber] >>> bitNumber) & 0x01);
     }
 
     private static int getByte(int[] buffer, int address) {

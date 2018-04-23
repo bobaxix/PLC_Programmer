@@ -82,7 +82,7 @@ public class ElevatorController {
         PropertyManager propertyManager = vw.getPropertyManager();
         for(Rectangle r : controls){
             String id = r.getId();
-            SimpleIntegerProperty property = propertyManager.getProperty(id);
+            MyIntegerProperty property = propertyManager.getProperty(id);
             if(property != null)
                 property.addListener((observableValue, oldValue, newValue) -> {
                     if((int)newValue == 1)
@@ -109,16 +109,18 @@ public class ElevatorController {
             String id = button.getId();
 
             button.setOnAction((value) -> {
-                button.getStyleClass().removeAll("buttonsInactive");
-                button.getStyleClass().add("buttonsActive");
-                BufferManager bufferManager = vw.getBufferManager();
-                try {
-                    bufferManager.setParameter(id, 1);
-                }
-                catch(NullPointerException e){
-                    System.out.println("Cannot find property! Check config!");
+                if(serviceBox.isSelected()) {
+                    button.getStyleClass().removeAll("buttonsInactive");
+                    button.getStyleClass().add("buttonsActive");
+                    BufferManager bufferManager = vw.getBufferManager();
+                    try {
+                        bufferManager.setParameter(id, 1);
+                    } catch (NullPointerException e) {
+                        System.out.println("Cannot find property! Check config!");
+                    }
                 }
             });
+
             PropertyManager propertyManager = vw.getPropertyManager();
             MyIntegerProperty property = propertyManager.getProperty(id);
             if (property != null) {
@@ -126,6 +128,10 @@ public class ElevatorController {
                     if (newValue == 0) {
                         button.getStyleClass().removeAll("buttonsActive");
                         button.getStyleClass().add("buttonsInactive");
+                    }
+                    else if(newValue == 1 && !serviceBox.isSelected()){
+                        button.getStyleClass().removeAll("buttonsInactive");
+                        button.getStyleClass().add("buttonsActive");
                     }
                 });
             }

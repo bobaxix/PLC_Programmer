@@ -2,10 +2,7 @@ package com.panel.view;
 
 import com.panel.transaction.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -35,9 +32,10 @@ public class ViewManager {
 
         ArrayList<Property> propertyList = new ArrayList<>();
         ArrayList<PanelField> bufferList = new ArrayList<>();
+        String userDir = System.getProperty("user.dir");
 
-        try(InputStream inputStream = getClass().getResourceAsStream("/configs/" + fileName);
-            InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+        try(FileReader streamReader = new FileReader(userDir+File.separator+
+                    "configs"+File.separator+fileName);
             BufferedReader br = new BufferedReader(streamReader))
         {
             String label = null;
@@ -47,7 +45,6 @@ public class ViewManager {
             line = br.readLine();
 
             while (line != null) {
-
                 if(checkIfNewStructure(line)){
                     if(line.trim().matches("- *in:$"))
                         workman = "in";
@@ -96,9 +93,10 @@ public class ViewManager {
                 }
             }
         }
-        catch(IOException e){}
+        catch(IOException e){
+            e.printStackTrace();
+        }
 
-        System.out.println("BufferSize = "+(bufferSize+1));
         bufferManager = new BufferManager(bufferList, bufferSize + 1);
         propertyManager = new PropertyManager(propertyList);
     }
