@@ -180,9 +180,8 @@ public class RootLayout extends Controller{
 		myThread.setViewManager(vw);
 		myThread.start();
 		controller.setViewManager(vw);
-		controller.setActionsForFloorIndicator();
-		controller.setActionsCabinRequests();
-		controller.setActionsControls();
+		controller.setActionsForToggleButtons();
+		controller.setActionsForIndicators();
 	}
 
 	@FXML

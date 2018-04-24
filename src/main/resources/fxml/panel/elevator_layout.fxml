@@ -14,6 +14,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.ToggleButton?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -37,7 +39,6 @@
                </ImageView>
             </graphic>
          </Button>
-          <CheckBox text="Service" prefHeight="40" fx:id="serviceBox"/>
          <BorderPane.margin>
             <Insets bottom="30.0" />
          </BorderPane.margin>
@@ -52,39 +53,123 @@
                </padding>
                <children>
                   <Label fx:id="doorsLabel" text="Doors" />
-                  <Rectangle fx:id="doors" height="100.0"  width="100.0" />
-                   <Label fx:id="moveUpLabel" text="Rotor Up" />
-                  <Rectangle fx:id="moveUp" height="100.0" width="100.0" />
-                   <Label fx:id="moveDownLabel" text="Rotor Down" />
-                  <Rectangle fx:id="moveDown" height="100.0" width="100.0" />
+                  <Rectangle fx:id="doors" height="100.0"  width="100.0"
+                             fill="lightsteelblue"/>
+                   <Label fx:id="moveUpLabel" text="Motor Up" />
+                  <Rectangle fx:id="moveUp" height="100.0" width="100.0"
+                             fill="lightsteelblue"/>
+                   <Label fx:id="moveDownLabel" text="Motor Down" />
+                  <Rectangle fx:id="moveDown" height="100.0" width="100.0"
+                             fill="lightsteelblue"/>
                </children>
             </VBox>
             <AnchorPane>
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cfd0d0" height="620.0" width="200.0" />
-                  <VBox layoutX="50.0" layoutY="20.0" spacing="20" alignment="CENTER">
-                     <Rectangle fx:id="floor4" arcHeight="20.0" arcWidth="20.0" fill="GREEN" height="100.0" width="100.0" />
-                     <Rectangle fx:id="floor3" arcHeight="20.0" arcWidth="20.0" fill="GREEN" height="100.0" width="100.0" />
-                     <Rectangle fx:id="floor2" arcHeight="20.0" arcWidth="20.0" fill="GREEN" height="100.0" width="100.0" />
-                     <Rectangle fx:id="floor1" arcHeight="20.0" arcWidth="20.0" fill="GREEN" height="100.0" width="100.0" />
-                     <Rectangle fx:id="floor0" arcHeight="20.0" arcWidth="20.0" fill="GREEN" height="100.0" width="100.0" />
+                   <VBox spacing="20.0" layoutY="20.0">
+                       <Circle fx:id="req4" radius="50.0" centerX="0.0"
+                               centerY="70.0" fill="GRAY"/>
+                       <Circle fx:id="req3" radius="50.0" centerX="0.0"
+                               centerY="70.0" fill="GRAY"/>
+                       <Circle fx:id="req2" radius="50.0" centerX="0.0"
+                               centerY="70.0" fill="GRAY"/>
+                       <Circle fx:id="req1" radius="50.0" centerX="0.0"
+                               centerY="70.0" fill="GRAY"/>
+                       <Circle fx:id="req0" radius="50.0" centerX="0.0"
+                               centerY="70.0" fill="GRAY"/>
+                   </VBox>
+                   <VBox spacing="20"  layoutX="110.0" layoutY="20.0"
+                         alignment="CENTER" prefWidth="30.0">
+                       <Label text="4" fx:id="fifthFloorLabel" prefHeight="100.0"/>
+                       <Label text="3" fx:id="fourthFloorLabel" prefHeight="100.0"/>
+                       <Label text="2" fx:id="thirdFloorLabel" prefHeight="100.0"/>
+                       <Label text="1" fx:id="secondFloorLabel" prefHeight="100.0"/>
+                       <Label text="P" fx:id="firstFloorLabel" prefHeight="100.0"/>
+                   </VBox>
+                  <Rectangle layoutX="150.0" arcHeight="5.0" arcWidth="5.0"
+                             fill="#cfd0d0" height="620.0" width="200.0" />
+                  <VBox layoutX="200.0" layoutY="20.0" spacing="20"
+                        alignment="CENTER">
+                     <Rectangle fx:id="floor4" arcHeight="20.0" arcWidth="20.0"
+                                fill="GREEN" height="100.0" width="100.0" />
+                     <Rectangle fx:id="floor3" arcHeight="20.0" arcWidth="20.0"
+                                fill="GREEN" height="100.0" width="100.0" />
+                     <Rectangle fx:id="floor2" arcHeight="20.0" arcWidth="20.0"
+                                fill="GREEN" height="100.0" width="100.0" />
+                     <Rectangle fx:id="floor1" arcHeight="20.0" arcWidth="20.0"
+                                fill="GREEN" height="100.0" width="100.0" />
+                     <Rectangle fx:id="floor0" arcHeight="20.0" arcWidth="20.0"
+                                fill="GREEN" height="100.0" width="100.0" />
                   </VBox>
                </children>
             </AnchorPane>
-         <GridPane vgap="20" hgap="20" alignment="CENTER">
-             <Button mnemonicParsing="false" text="1" prefWidth="120" prefHeight="120"
-                     fx:id="cabinReq0" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-             <Button mnemonicParsing="false" text="STOP" prefWidth="120" prefHeight="120"
-                     fx:id="stop" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-             <Button mnemonicParsing="false" text="2" prefWidth="120" prefHeight="120"
-                     fx:id="cabinReq1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-             <Button mnemonicParsing="false" text="3" prefWidth="120" prefHeight="120"
-                     fx:id="cabinReq2" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-             <Button mnemonicParsing="false" text="4" prefWidth="120" prefHeight="120"
-                     fx:id="cabinReq3" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-             <Button mnemonicParsing="false" text="5" prefWidth="120" prefHeight="120"
-                     fx:id="cabinReq4" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-         </GridPane>
+             <GridPane vgap="20.0" hgap="20.0">
+                 <Label text="SERVICE MODE" fx:id="serviceControlLabel"
+                    GridPane.rowIndex="0" GridPane.columnIndex="0"
+                        GridPane.halignment="CENTER"/>
+                 <Label text="Doors control" fx:id="doorsControlLabel"
+                        GridPane.rowIndex="0" GridPane.columnIndex="1"
+                        GridPane.halignment="CENTER"/>
+                 <ToggleButton prefHeight="100.0" fx:id="serviceButton"
+                               GridPane.rowIndex="1" GridPane.columnIndex="0"
+                               GridPane.halignment="CENTER">
+                 <graphic>
+                     <ImageView>
+                         <Image url="@/icons/service.png"/>
+                     </ImageView>
+                 </graphic>
+                 </ToggleButton>
+                 <ToggleButton prefHeight="100.0" fx:id="doorsButton"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                               GridPane.halignment="CENTER">
+                     <graphic>
+                         <ImageView>
+                             <Image url="@/icons/doors.png"/>
+                         </ImageView>
+                     </graphic>
+                 </ToggleButton>
+
+                 <Label text="Motor up control" fx:id="motorUpControlLabel"
+                        GridPane.rowIndex="2" GridPane.columnIndex="0"
+                        GridPane.halignment="CENTER"/>
+                 <Label text="Motor down control" fx:id="motorControlLabel"
+                        GridPane.rowIndex="2" GridPane.columnIndex="1"
+                        GridPane.halignment="CENTER"/>
+
+                 <ToggleButton prefHeight="100.0" fx:id="rotorUpButton"
+                               GridPane.rowIndex="3" GridPane.columnIndex="0"
+                               GridPane.halignment="CENTER">
+                     <graphic>
+                         <ImageView>
+                             <Image url="@/icons/rotorUp.png"/>
+                         </ImageView>
+                     </graphic>
+                 </ToggleButton>
+                 <ToggleButton prefHeight="100.0" fx:id="rotorDownButton"
+                               GridPane.rowIndex="3" GridPane.columnIndex="1"
+                               GridPane.halignment="CENTER">
+                     <graphic>
+                         <ImageView>
+                             <Image url="@/icons/rotorDown.png"/>
+                         </ImageView>
+                     </graphic>
+                 </ToggleButton>
+
+
+                 <Label text="Bell Control" fx:id="bellControlLabel"
+                        GridPane.rowIndex="4" GridPane.columnIndex="0"
+                        GridPane.halignment="CENTER"/>
+
+
+                 <ToggleButton prefHeight="100.0" fx:id="bellButton"
+                               GridPane.rowIndex="5" GridPane.columnIndex="0"
+                               GridPane.halignment="CENTER">
+                     <graphic>
+                         <ImageView>
+                             <Image url="@/icons/bell.png"/>
+                         </ImageView>
+                     </graphic>
+                 </ToggleButton>
+             </GridPane>
       </children>
       </HBox>
    </center>
@@ -100,12 +185,21 @@
    </fx:define>
 
     <fx:define>
+        <ArrayList fx:id="requests">
+        <fx:reference source="req0" />
+        <fx:reference source="req1" />
+        <fx:reference source="req2" />
+        <fx:reference source="req3" />
+        <fx:reference source="req4" />
+        </ArrayList>
+    </fx:define>
+
+    <fx:define>
         <ArrayList fx:id="buttons">
-           <fx:reference source="cabinReq0" />
-           <fx:reference source="cabinReq1" />
-           <fx:reference source="cabinReq2" />
-           <fx:reference source="cabinReq3" />
-           <fx:reference source="cabinReq4" />
+           <fx:reference source="rotorUpButton" />
+            <fx:reference source="rotorDownButton"/>
+           <fx:reference source="doorsButton" />
+           <fx:reference source="bellButton" />
         </ArrayList>
     </fx:define>
 

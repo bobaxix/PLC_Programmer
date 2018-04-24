@@ -8,8 +8,8 @@ public abstract class BufferReaderWriter {
     public static final byte LITTLE_ADR_POS = 2;
 
     private static void setByte(int address, int value, int[] buffer) {
-        int regNumber = (address >>> REG_POS) & 0x07;
-        int byteNumber = (address >>> LITTLE_ADR_POS) & 0x07;
+        int regNumber = (address >>> REG_POS);
+        int byteNumber = (address >>> LITTLE_ADR_POS) & 0x03;
 
         int mask = 0xFF << (byteNumber * 8);
         int cleanedValue = buffer[regNumber] & ~(mask);
@@ -17,16 +17,16 @@ public abstract class BufferReaderWriter {
     }
 
     private static void setWord(int address, int value, int[] buffer) {
-        int wordNumber = (address >>> LITTLE_ADR_POS) & 0x07;
-        int regNumber = (address >>> REG_POS) & 0x07;
+        int wordNumber = (address >>> LITTLE_ADR_POS) & 0x01;
+        int regNumber = (address >>> REG_POS);
 
-        int mask = 0xFFFF << (wordNumber * REG_POS);
+        int mask = 0xFFFF << (wordNumber * 16);
         int cleanedValue = buffer[regNumber] & (~mask);
         buffer[regNumber] = cleanedValue | (value << (wordNumber * 8));
     }
 
     private static void setDoubleWord(int address, int value, int[] buffer) {
-        int regNumber = (address >>> REG_POS) & 0x07;
+        int regNumber = (address >>> REG_POS);
         buffer[regNumber] = value;
     }
 
@@ -49,22 +49,22 @@ public abstract class BufferReaderWriter {
 
     private static int getByte(int[] buffer, int address) {
 
-        int byteNumber = ((address >>> LITTLE_ADR_POS) & 0x07);
-        int regNumber = ((address >>> REG_POS) & 0x07);
+        int byteNumber = ((address >>> LITTLE_ADR_POS) & 0x03);
+        int regNumber = ((address >>> REG_POS));
 
         return ((buffer[regNumber] >>> (byteNumber * 8)) & 0xFF);
     }
 
     private static int getWord(int[] buffer, int address) {
 
-        int wordNumber = ((address >>> LITTLE_ADR_POS) & 0x07);
-        int regNumber = ((address >>> REG_POS) & 0x07);
+        int wordNumber = ((address >>> LITTLE_ADR_POS) & 0x01);
+        int regNumber = ((address >>> REG_POS));
 
         return ((buffer[regNumber] >>> (wordNumber * 16)) & 0xFFFF);
     }
 
     private static int getDoubleWord(int[] buffer, int address) {
-        int regNumber = ((address >>> REG_POS) & 0x07);
+        int regNumber = ((address >>> REG_POS));
         return buffer[regNumber];
     }
 

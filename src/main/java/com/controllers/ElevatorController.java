@@ -5,19 +5,24 @@ import com.panel.transaction.MyIntegerProperty;
 import com.panel.transaction.PropertyManager;
 import com.panel.view.ViewManager;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class ElevatorController {
 
     @FXML
-    ArrayList<Button> buttons;
+    ArrayList<ToggleButton> buttons;
 
     @FXML
     ArrayList<Rectangle> cabinPosition;
@@ -26,7 +31,10 @@ public class ElevatorController {
     ArrayList<Rectangle> controls;
 
     @FXML
-    CheckBox serviceBox;
+    private ToggleButton serviceButton;
+
+    @FXML
+    private ArrayList<Circle> requests;
 
     private Runnable backToStart;
     private ViewManager vw;
@@ -36,8 +44,10 @@ public class ElevatorController {
         for(Rectangle r : controls) {
             r.getStyleClass().add("controls");
         }
-        for(Button button : buttons)
-            button.getStyleClass().add("buttonsInactive");
+        for(ToggleButton button : buttons) {
+                button.getStyleClass().add("toggleButtons");
+        }
+        serviceButton.getStyleClass().add("serviceToggleButton");
     }
 
     @FXML
@@ -54,87 +64,64 @@ public class ElevatorController {
         backToStart = r;
     }
 
-    private void recolorFloor(Rectangle floor, int value){
-        if(value == 0)
-            floor.setFill(Color.GREEN);
-        else
-            floor.setFill(Color.RED);
-    }
-
     public void setViewManager(ViewManager vw){
         this.vw = vw;
     }
 
-    public void setActionsForFloorIndicator(){
-        for(Rectangle floor : cabinPosition){
-            String id = floor.getId();
+    public void setActionsForIndicators(){
+        recolorShapes(requests, Color.RED, Color.GRAY);
+        recolorShapes(cabinPosition, Color.RED, Color.GREEN);
+        recolorShapes(controls, Color.BLUE, Color.LIGHTSTEELBLUE);
+    }
+
+    private void recolorShapes(ArrayList<? extends Shape> shapes,
+                               Paint colorOn,
+                               Paint colorOff){
+        for(Shape s : shapes){
+            String id = s.getId();
             MyIntegerProperty property = vw.getPropertyManager().getProperty(id);
             if(property != null){
-                property.addValueListener(value -> {
-                        recolorFloor(floor, value);
-                } );
+                property.addListener((obs, oldVal, newVal) -> {
+                    if((int) newVal == 1)
+                        s.setFill(colorOn);
+                    else
+                        s.setFill(colorOff);
+                });
             }
         }
     }
 
-    public void setActionsControls(){
+    public void setActionsForToggleButtons(){
 
-        PropertyManager propertyManager = vw.getPropertyManager();
-        for(Rectangle r : controls){
-            String id = r.getId();
-            MyIntegerProperty property = propertyManager.getProperty(id);
-            if(property != null)
-                property.addListener((observableValue, oldValue, newValue) -> {
-                    if((int)newValue == 1)
-                        r.setFill(Color.BLUE);
-                    else
-                        r.setFill(Color.valueOf("#353634"));
-                });
-        }
-
-        serviceBox.selectedProperty().addListener((obVal, oldVal, newVal) -> {
+        serviceButton.selectedProperty().addListener((obs, oldVal, newVal) -> {
             BufferManager bm = vw.getBufferManager();
             if(newVal == true){
-                bm.setToggleBuffer(serviceBox.getId(), 1);
+                buttons.forEach(button -> button.setDisable(false));
             }
             else{
-                bm.setToggleBuffer(serviceBox.getId(), 0);
-            }
-        });
-    }
-
-    public void setActionsCabinRequests() {
-        for (Button button : buttons) {
-
-            String id = button.getId();
-
-            button.setOnAction((value) -> {
-                if(serviceBox.isSelected()) {
-                    button.getStyleClass().removeAll("buttonsInactive");
-                    button.getStyleClass().add("buttonsActive");
-                    BufferManager bufferManager = vw.getBufferManager();
-                    try {
-                        bufferManager.setParameter(id, 1);
-                    } catch (NullPointerException e) {
-                        System.out.println("Cannot find property! Check config!");
-                    }
-                }
-            });
-
-            PropertyManager propertyManager = vw.getPropertyManager();
-            MyIntegerProperty property = propertyManager.getProperty(id);
-            if (property != null) {
-                property.addValueListener(newValue -> {
-                    if (newValue == 0) {
-                        button.getStyleClass().removeAll("buttonsActive");
-                        button.getStyleClass().add("buttonsInactive");
-                    }
-                    else if(newValue == 1 && !serviceBox.isSelected()){
-                        button.getStyleClass().removeAll("buttonsInactive");
-                        button.getStyleClass().add("buttonsActive");
-                    }
+                buttons.forEach(button -> {
+                    button.setSelected(false);
+                    button.setDisable(true);
                 });
             }
+            bm.setToggleBuffer(serviceButton.getId(), booleanToIntCast(newVal));
+        });
+
+        for(ToggleButton button : buttons){
+            button.setDisable(true);
+            button.setSelected(false);
+            button.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                BufferManager bm = vw.getBufferManager();
+                bm.setToggleBuffer(button.getId(), booleanToIntCast(newVal));
+            });
+
         }
+    }
+
+    private int booleanToIntCast(boolean bool){
+        if(bool)
+            return 1;
+        else
+            return 0;
     }
 }

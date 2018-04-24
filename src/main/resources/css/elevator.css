@@ -1,38 +1,29 @@
-.buttonsActive{
-    -fx-text-fill: white;
-    -fx-font-size: 20;
-    -fx-font-weight: bolder;
-    -fx-background-color: red;
-    -fx-background-radius: 15 30 15 30;
-    -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 10);
-}
-
-.buttonsInactive{
-    -fx-text-fill: white;
-    -fx-font-size: 20;
-    -fx-font-weight: bolder;
+.toggleButtons{
     -fx-background-color: grey;
     -fx-background-radius: 15 30 15 30;
     -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 10);
 }
 
-.buttonsInactive:pressed{
-    -fx-translate-y: 5;
+.toggleButtons:selected{
     -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 5);
+    -fx-translate-y: 5;
 }
 
-.buttonsActive:pressed{
-    -fx-translate-y: 5;
-    -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 5);
+.serviceToggleButton{
+    -fx-background-color: grey;
+    -fx-background-radius: 15 30 15 30;
+    -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 10);
 }
 
-
-#stop{
-    -fx-text-fill: white;
-    -fx-font-size: 20;
-    -fx-font-weight: bolder;
+.serviceToggleButton:selected{
     -fx-background-color: red;
-    -fx-background-radius: 30 15 30 15;
+    -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 5);
+    -fx-translate-y: 5;
+}
+
+.toggleButtons:disabled{
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 15 30 15 30;
 }
 
 .controls{
@@ -61,16 +52,59 @@
     -fx-font-weight: bold;
 }
 
-#stop{
-    -fx-text-fill: white;
+#doorsControlLabel{
+    -fx-text-fill: #353634;
     -fx-font-size: 20;
-    -fx-font-weight: bolder;
-    -fx-background-color: red;
-    -fx-background-radius: 30 15 30 15;
-    -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 10);
+    -fx-font-weight: bold;
 }
 
-#stop:pressed{
-    -fx-translate-y: 5;
-    -fx-effect: dropShadow(three-pass-box, #999, 0, 0, 0, 5);
+#serviceControlLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#motorControlLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#motorUpControlLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#bellControlLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#firstFloorLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+#secondFloorLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+#thirdFloorLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+
+#fourthFloorLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+#fifthFloorLabel{
+    -fx-text-fill: #353634;
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
 }

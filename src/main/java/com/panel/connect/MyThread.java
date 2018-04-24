@@ -17,6 +17,7 @@ public class MyThread extends Service<Void>{
     public MyThread(){
         this.spiManager = SpiManager.getInstance();
         control = readControl();
+        control = 1;
         buffer = new int[control];
     }
 
@@ -70,7 +71,7 @@ public class MyThread extends Service<Void>{
                     }
 
                 vm.getPropertyManager().setProperties(buffer);
-                rest(100);
+                rest(1000);
 
                 System.out.println("------------");
                 return null;

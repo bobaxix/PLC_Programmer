@@ -22,8 +22,9 @@ public class BufferManager {
 
     public void setToggleBuffer (String id, int value) throws NullPointerException{
         PanelField buffer = findBuffer(id);
-        BufferReaderWriter.set(buffer.getAddress(), value,
-                toggleBuffer, buffer.getAccessType());
+        if(buffer != null)
+            BufferReaderWriter.set(buffer.getAddress(), value,
+                   toggleBuffer, buffer.getAccessType());
     }
 
 
@@ -42,6 +43,9 @@ public class BufferManager {
     }
 
     private PanelField findBuffer(String id){
+        if(id == null)
+            return null;
+
         for(PanelField buffer : buffersList){
             if(buffer.getId().equals(id))
                 return buffer;
