@@ -14,13 +14,13 @@ import java.util.regex.Pattern;
 public class InOutMem implements CodeGenerator {
 
     private final int MEMORY_BASE = 0x00000080;
-    private final int MEMORY_SIZE = 0x000007F;
+    private final int MEMORY_SIZE = 0x000007F; //MD 0 -3
 
     private final int INPUT_BASE = 0x00000000;
-    private final int INPUT_SIZE = 0x0000003F;
+    private final int INPUT_SIZE = 0x0000003F; //ID 0-1
 
     private final int OUTPUT_BASE = 0x00000040;
-    private final int OUTPUT_SIZE = 0x0000003F;
+    private final int OUTPUT_SIZE = 0x0000003F; //OD 0-1
 
     Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 

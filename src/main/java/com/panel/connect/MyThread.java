@@ -17,7 +17,6 @@ public class MyThread extends Service<Void>{
     public MyThread(){
         this.spiManager = SpiManager.getInstance();
         control = readControl();
-        control = 1;
         buffer = new int[control];
     }
 
@@ -62,16 +61,17 @@ public class MyThread extends Service<Void>{
                 }
 
                 // Receive data from bridge
-                if((status & Status.APB_READY) != 0)
-                    for(int i =0; i < control; i++) {
+                if((status & Status.APB_READY) != 0) {
+                    for (int i = 0; i < control; i++) {
                         buffer[i] = receiveData();
-                        System.out.println("Received data "+i+": "+buffer[i]);
-                        System.out.println("Hex "+i+": "+Integer.toHexString(buffer[i]));
-                        System.out.println("Bin "+i+": "+Integer.toBinaryString(buffer[i]));
+                        System.out.println("Received data " + i + ": " + buffer[i]);
+                        System.out.println("Hex " + i + ": " + Integer.toHexString(buffer[i]));
+                        System.out.println("Bin " + i + ": " + Integer.toBinaryString(buffer[i]));
                     }
 
-                vm.getPropertyManager().setProperties(buffer);
-                rest(1000);
+                    vm.getPropertyManager().setProperties(buffer);
+                }
+                rest(100);
 
                 System.out.println("------------");
                 return null;

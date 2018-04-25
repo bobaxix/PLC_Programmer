@@ -27,7 +27,7 @@
 }
 
 .controls{
-    -fx-fill: #dee2e8;
+    -fx-fill: lightsteelblue;
     -fx-arc-height: 20;
     -fx-arc-width: 20;
     -fx-stroke: black;

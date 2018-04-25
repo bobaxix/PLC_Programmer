@@ -53,14 +53,11 @@
                </padding>
                <children>
                   <Label fx:id="doorsLabel" text="Doors" />
-                  <Rectangle fx:id="doors" height="100.0"  width="100.0"
-                             fill="lightsteelblue"/>
+                  <Rectangle fx:id="doors" height="100.0"  width="100.0"/>
                    <Label fx:id="moveUpLabel" text="Motor Up" />
-                  <Rectangle fx:id="moveUp" height="100.0" width="100.0"
-                             fill="lightsteelblue"/>
+                  <Rectangle fx:id="moveUp" height="100.0" width="100.0"/>
                    <Label fx:id="moveDownLabel" text="Motor Down" />
-                  <Rectangle fx:id="moveDown" height="100.0" width="100.0"
-                             fill="lightsteelblue"/>
+                  <Rectangle fx:id="moveDown" height="100.0" width="100.0"/>
                </children>
             </VBox>
             <AnchorPane>
